@@ -6,7 +6,7 @@ class DailyMainMarketSummary extends DataSource {
     const DECLINING = 3;
     const TRADING_FIRM = 4;
 
-    protected $url = 'http://www.jamstockex.com/controller.php?action=view_summary';
+    protected $url = '';
     protected $keys = array();
     protected $tables = array();
     protected $data = array();
@@ -23,6 +23,7 @@ class DailyMainMarketSummary extends DataSource {
 
     function __construct($date) {
         $this->date = $date;
+        $this->url = JSE_URL . '/controller.php?action=view_summary';
     }
 
     public function init() {

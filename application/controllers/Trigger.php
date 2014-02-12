@@ -21,8 +21,9 @@ class Trigger extends CI_Controller {
     }
 
     public function DailyMainMarketSummary() {
-
         $date = $this->input->get('date');
+        $date = date("m/d/Y", strtotime($date));
+  
         $summary = new DailyMainMarketSummary($date);
         $result = $summary->fetch();
 
