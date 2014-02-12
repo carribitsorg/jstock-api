@@ -53,7 +53,7 @@ class Trigger extends CI_Controller {
         $this->output->set_output(json_encode($result));
     }
 
-    public function test() {
+    public function summaryGraph() {
         error_reporting(0);
         ini_set('display_errors', 0);
 

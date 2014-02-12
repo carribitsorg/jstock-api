@@ -5,6 +5,9 @@ include("class/pData.class.php");
 include("class/pDraw.class.php");
 include("class/pImage.class.php");
 
+global $yScaleCount;
+$yScaleCount = 0;
+
 class StockGraph {
 
     private $yScaleCount = 0;
@@ -17,6 +20,10 @@ class StockGraph {
     }
 
     public function render() {
+
+        global $yScaleCount;
+        $yScaleCount = 0;
+
         /* Create and populate the pData object */
         $MyData = new pData();
         $points = $this->getPairs($this->data);
@@ -29,22 +36,26 @@ class StockGraph {
         $MyData->setAbscissa("Labels");
 
         $MyData->setAxisDisplay(0, AXIS_FORMAT_CUSTOM, "YAxisFormat");
+        $MyData->setAxisColor(0, array("R" => 96, "G" => 96, "B" => 96));
+
+
 
         /* Create the pChart object */
         $myPicture = new pImage(310, 180, $MyData);
+        
 
         /* Turn of Antialiasing */
         $myPicture->Antialias = FALSE;
         $serieSettings = array("R" => 255, "G" => 69, "B" => 0);
         $MyData->setPalette("Stocks", $serieSettings);
 
-        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 6));
+        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 6, "R" => 96, "G" => 96, "B" => 96));
 
         /* Define the chart area */
         $myPicture->setGraphArea(38, 0, 310, 170);
 
         /* Draw the scale */
-        $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
+        $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 220, "GridG" => 220, "GridB" => 220, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
         $myPicture->drawScale($scaleSettings);
 
         $myPicture->Antialias = TRUE;
@@ -64,11 +75,7 @@ class StockGraph {
 
     public function output() {
         /* Render the picture (choose the best way) */
-        $this->graphPhoto->autoOutput("pictures/example.Combo.area.lines.png");
-    }
-
-    function YAxisFormat($Value) {
-        return number_format(78000 + ($this->yScaleCount++ * 1200));
+        $this->graphPhoto->autoOutput("graphs/" . date('Y-m-d') . ".png");
     }
 
     function getPairs($text) {
@@ -88,6 +95,11 @@ class StockGraph {
         return $pairs;
     }
 
+}
+
+function YAxisFormat($value) {
+    global $yScaleCount;
+    return number_format(78000 + ($yScaleCount++ * 1200));
 }
 
 ?>
