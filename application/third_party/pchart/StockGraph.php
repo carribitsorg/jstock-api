@@ -55,7 +55,7 @@ class StockGraph {
         $myPicture->setGraphArea(38, 0, 310, 170);
 
         /* Draw the scale */
-        $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 220, "GridG" => 220, "GridB" => 220, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
+        $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
         $myPicture->drawScale($scaleSettings);
 
         $myPicture->Antialias = TRUE;

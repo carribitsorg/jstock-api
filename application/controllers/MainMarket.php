@@ -40,8 +40,20 @@ class MainMarket extends BaseController {
         $data = $model->getOneMonthGraph($dateISO);
 
         $graph = new StockGraph($data['one_month_graph']);
-        ob_get_clean();
+        $this->clearBuffer();
         $graph->output();
+    }
+    
+    public function marketIndexDetails() {
+        $this->clearBuffer();
+
+        $dateISO = $this->input->get('date');
+
+        $model = new MarketIndexChartModel();
+        $data = $model->getMarketIndexDetails($dateISO);
+
+        $this->clearBuffer();
+        $this->toJson($data);
     }
 
 }

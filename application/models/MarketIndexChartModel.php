@@ -33,6 +33,20 @@ class MarketIndexChartModel extends CI_Model {
         }
         return array();
     }
+    
+    function getMarketIndexDetails($date) {
+        $this->db->select('value_date, value, change, change_percentage, change_direction, vol');
+        $this->db->from('daily_market_report');
+        $this->db->where(array('report_date' => $date));
+        $this->db->limit(1);
+
+        $result = $this->db->get()->result_array();
+
+        if (is_array($result) && count($result) > 0) {
+            return $result[0];
+        }
+        return array();
+    }
 
 }
 
