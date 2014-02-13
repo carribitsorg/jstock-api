@@ -10,10 +10,16 @@
  *
  * @author 
  */
-class MarketIndexCharts extends DataSource {
+class MarketIndexChart extends DataSource {
 
     protected $url = '';
     protected $data = array();
+
+    /**
+     *
+     * @var MarketIndexChartModel 
+     */
+    protected $model = null;
 
     function __construct($date) {
         $this->date = $date;
@@ -54,6 +60,7 @@ class MarketIndexCharts extends DataSource {
         foreach ($rows as $row) {
             if ($rowIndex == 1) {
                 $cols = $row->getElementsByTagName('td');
+                $this->data['report_date'] = $cols->item(0)->nodeValue;
                 $this->data['value_date'] = $cols->item(0)->nodeValue;
                 $this->data['value'] = $this->toDecimal($cols->item(1)->nodeValue);
                 $this->data['change'] = $this->toDecimal($cols->item(2)->nodeValue);
@@ -84,11 +91,19 @@ class MarketIndexCharts extends DataSource {
         
     }
 
+    protected function save() {
+        $this->model->save($this->data);
+    }
+
     public function fetch($result = true) {
-        //echo $this->url;exit;
-        $this->init();
-        $this->load();
-        
+        $this->model = new MarketIndexChartModel();
+
+        if (!$this->model->isDBCached($this->date)) {
+            $this->init();
+            $this->load();
+            $this->save();
+        }
+
         return $this->data;
     }
 
