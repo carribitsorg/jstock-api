@@ -2,10 +2,10 @@
 
 class MarketIndexChartModel extends CI_Model {
 
-    function isDBCached($date) {
+    function isDBCached($date, $indexName) {
         $this->db->select('report_date');
         $this->db->from('daily_market_report');
-        $this->db->where(array('report_date' => $date));
+        $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
         $this->db->limit(1);
 
         $query = $this->db->get();
@@ -20,10 +20,10 @@ class MarketIndexChartModel extends CI_Model {
         $this->db->insert('daily_market_report', $data);
     }
 
-    function getOneMonthGraph($date) {
+    function getOneMonthGraph($date, $indexName) {
         $this->db->select('one_month_graph');
         $this->db->from('daily_market_report');
-        $this->db->where(array('report_date' => $date));
+        $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
         $this->db->limit(1);
 
         $result = $this->db->get()->result_array();
@@ -33,11 +33,11 @@ class MarketIndexChartModel extends CI_Model {
         }
         return array();
     }
-    
-    function getMarketIndexDetails($date) {
-        $this->db->select('value_date, value, change, change_percentage, change_direction, vol');
+
+    function getMarketIndexDetails($date, $indexName) {
+        $this->db->select('value_date, index_name, value, change, change_perc,change_perc_dir, change_dir, vol');
         $this->db->from('daily_market_report');
-        $this->db->where(array('report_date' => $date));
+        $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
         $this->db->limit(1);
 
         $result = $this->db->get()->result_array();

@@ -15,7 +15,7 @@ class MainMarket extends BaseController {
 
     public function dailySummary() {
         $dateISO = $this->input->get('date');
-        
+
         $this->model = new DailyMainSummaryModel();
 
         $rows = $this->model->getDailyMainSummary($dateISO);
@@ -27,7 +27,7 @@ class MainMarket extends BaseController {
             $resultFromatted['stocks'][$row['stock']][] = $row;
         }
         $resultFromatted['details'] = $delails;
-        
+
         $this->toJson($resultFromatted);
     }
 
@@ -35,22 +35,24 @@ class MainMarket extends BaseController {
         $this->clearBuffer();
 
         $dateISO = $this->input->get('date');
+        $indexName = (string)$this->input->get('index_name');
 
         $model = new MarketIndexChartModel();
-        $data = $model->getOneMonthGraph($dateISO);
+        $data = $model->getOneMonthGraph($dateISO, $indexName);
 
         $graph = new StockGraph($data['one_month_graph']);
         $this->clearBuffer();
         $graph->output();
     }
-    
+
     public function marketIndexDetails() {
         $this->clearBuffer();
 
         $dateISO = $this->input->get('date');
+        $indexName = (string)$this->input->get('index_name');
 
         $model = new MarketIndexChartModel();
-        $data = $model->getMarketIndexDetails($dateISO);
+        $data = $model->getMarketIndexDetails($dateISO, $indexName);
 
         $this->clearBuffer();
         $this->toJson($data);

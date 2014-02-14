@@ -14,6 +14,13 @@ class MarketIndexChart extends DataSource {
 
     protected $url = '';
     protected $data = array();
+    protected $index = 0;
+    protected $indexName;
+
+    const MAIN_INDEX = 'MAIN_INDEX';
+    const JSE_SELECT = 'JSE_SELECT';
+    const ALL_JAMAICAN = 'ALL_JAMAICAN';
+    const CROSS_LISTED = 'CROSS_LISTED';
 
     /**
      *
@@ -21,9 +28,11 @@ class MarketIndexChart extends DataSource {
      */
     protected $model = null;
 
-    function __construct($date) {
+    function __construct($date, $index, $indexName) {
         $this->date = $date;
-        $this->url = JSE_URL . '/controller.php?action=view_index_charts&IndexCode=1';
+        $this->index = $index;
+        $this->indexName = $indexName;
+        $this->url = JSE_URL . "/controller.php?action=view_index_charts&IndexCode=$index";
     }
 
     public function init() {
@@ -38,11 +47,12 @@ class MarketIndexChart extends DataSource {
     }
 
     public function graphData() {
-        $this->data['one_week_graph'] = file_get_contents(JSE_URL . '/website/getDayData.php?day_index=0&stock_index=1');
-        $this->data['one_month_graph'] = file_get_contents(JSE_URL . '/website/getDayData.php?day_index=1&stock_index=1');
-        $this->data['three_month_graph'] = file_get_contents(JSE_URL . '/website/getDayData.php?day_index=2&stock_index=1');
-        $this->data['six_month_graph'] = file_get_contents(JSE_URL . '/website/getDayData.php?day_index=3&stock_index=1');
-        $this->data['one_year_graph'] = file_get_contents(JSE_URL . '/website/getDayData.php?day_index=4&stock_index=1');
+        $index = $this->index;
+        $this->data['one_week_graph'] = file_get_contents(JSE_URL . "/website/getDayData.php?day_index=0&stock_index=$index");
+        $this->data['one_month_graph'] = file_get_contents(JSE_URL . "/website/getDayData.php?day_index=1&stock_index=$index");
+        $this->data['three_month_graph'] = file_get_contents(JSE_URL . "/website/getDayData.php?day_index=2&stock_index=$index");
+        $this->data['six_month_graph'] = file_get_contents(JSE_URL . "/website/getDayData.php?day_index=3&stock_index=$index");
+        $this->data['one_year_graph'] = file_get_contents(JSE_URL . "/website/getDayData.php?day_index=4&stock_index=$index");
     }
 
     public function summaryDetail($dom) {
@@ -56,6 +66,8 @@ class MarketIndexChart extends DataSource {
         $this->summaryDetail1 = trim($table->nodeValue);
 
         $rows = $table->getElementsByTagName('tr');
+        
+        $this->data['index_name'] = $this->indexName;
 
         foreach ($rows as $row) {
             if ($rowIndex == 1) {
@@ -64,8 +76,9 @@ class MarketIndexChart extends DataSource {
                 $this->data['value_date'] = $cols->item(0)->nodeValue;
                 $this->data['value'] = $this->toDecimal($cols->item(1)->nodeValue);
                 $this->data['change'] = $this->toDecimal($cols->item(2)->nodeValue);
-                $this->data['change_percentage'] = $this->toDecimal($cols->item(3)->nodeValue);
-                $this->data['change_direction'] = $cols->item(3)->getElementsByTagName('img')->item(0)->getAttribute('src');
+                $this->data['change_perc'] = $this->toDecimal($cols->item(3)->nodeValue);
+                $this->data['change_dir'] = $cols->item(2)->getElementsByTagName('img')->item(0)->getAttribute('src');
+                $this->data['change_perc_dir'] = $cols->item(3)->getElementsByTagName('img')->item(0)->getAttribute('src');
             } else if ($rowIndex == 3) {
                 $cols = $row->getElementsByTagName('td');
                 $this->data['vol'] = $this->toDecimal($cols->item(0)->nodeValue);
@@ -98,7 +111,7 @@ class MarketIndexChart extends DataSource {
     public function fetch($result = true) {
         $this->model = new MarketIndexChartModel();
 
-        if (!$this->model->isDBCached($this->date)) {
+        if (!$this->model->isDBCached($this->date, $this->indexName)) {
             $this->init();
             $this->load();
             $this->save();
