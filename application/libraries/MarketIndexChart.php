@@ -17,10 +17,7 @@ class MarketIndexChart extends DataSource {
     protected $index = 0;
     protected $indexName;
 
-    const MAIN_INDEX = 'MAIN_INDEX';
-    const JSE_SELECT = 'JSE_SELECT';
-    const ALL_JAMAICAN = 'ALL_JAMAICAN';
-    const CROSS_LISTED = 'CROSS_LISTED';
+   
 
     /**
      *

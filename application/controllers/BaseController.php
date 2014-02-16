@@ -11,9 +11,15 @@ class BaseController extends CI_Controller {
         $this->load->library('DataSource');
         $this->load->library('DailyMainMarketSummary');
         $this->load->library('MarketIndexChart');
+        $this->load->library('MarketIndexPerformance');
+         $this->load->library('MarketIndexHistory');
+        
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
+        $this->load->model('MarketIndexPerformanceModel');
+        $this->load->model('MarketIndexHistoryModel');
+
         $this->config->set_item('csrf_protection', FALSE);
     }
 
@@ -25,8 +31,8 @@ class BaseController extends CI_Controller {
     protected function clearBuffer() {
         ob_get_clean();
     }
-    
-    public function toJson($data){
+
+    public function toJson($data) {
         $this->clearBuffer();
         $this->output->set_header("Access-Control-Allow-Methods:  GET, POST, OPTIONS");
         $this->output->set_header("Access-Control-Allow-Origin: *");
@@ -35,6 +41,7 @@ class BaseController extends CI_Controller {
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($data));
     }
+
 }
 
 ?>
