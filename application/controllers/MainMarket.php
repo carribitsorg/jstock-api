@@ -54,7 +54,6 @@ class MainMarket extends BaseController {
         $model = new MarketIndexChartModel();
         $data = $model->getMarketIndexDetails($dateISO, $indexName);
 
-        $this->clearBuffer();
         $this->toJson($data);
     }
 
