@@ -12,13 +12,14 @@ class BaseController extends CI_Controller {
         $this->load->library('DailyMainMarketSummary');
         $this->load->library('MarketIndexChart');
         $this->load->library('MarketIndexPerformance');
-         $this->load->library('MarketIndexHistory');
-        
+        $this->load->library('MarketIndexHistory');
+        $this->load->library('MarketIndexComposition');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
         $this->load->model('MarketIndexPerformanceModel');
         $this->load->model('MarketIndexHistoryModel');
+        $this->load->model('MarketIndexCompositionModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }

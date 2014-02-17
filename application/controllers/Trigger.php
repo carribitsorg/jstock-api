@@ -44,52 +44,77 @@ class Trigger extends BaseController {
         $summary = new MarketIndexChart($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
-    
-     public function mainMarketIndexPerformance() {
+
+    public function mainIndexPerformance() {
         $dateISO = date("Y-m-d");
         $summary = new MarketIndexPerformance($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
-    public function jseSelectMarketIndexPerformance() {
+
+    public function jseSelectIndexPerformance() {
         $dateISO = date("Y-m-d");
         $summary = new MarketIndexPerformance($dateISO, 2, DataSource::JSE_SELECT);
         $summary->fetch();
     }
-    public function allJamaicanMarketIndexPerformance() {
+
+    public function allJamaicanIndexPerformance() {
         $dateISO = date("Y-m-d");
         $summary = new MarketIndexPerformance($dateISO, 3, DataSource::ALL_JAMAICAN);
         $summary->fetch();
     }
-    public function crossListedMarketIndexPerformance() {
+
+    public function crossListedIndexPerformance() {
         $dateISO = date("Y-m-d");
         $summary = new MarketIndexPerformance($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
-    
+
     public function mainMarketIndexHistory() {
         $dateISO = date("Y-m-d");
         $summary = new MarketIndexHistory($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
-    public function jseSelectMarketMarketIndexHistory() {
+
+    public function jseSelectIndexHistory() {
         $dateISO = date("Y-m-d");
-        $summary = new MarketIndexHistory($dateISO, 1, DataSource::JSE_SELECT);
+        $summary = new MarketIndexHistory($dateISO, 2, DataSource::JSE_SELECT);
         $summary->fetch();
     }
-    public function allJamaicanMarketIndexHistory() {
+
+    public function allJamaicanIndexHistory() {
         $dateISO = date("Y-m-d");
-        $summary = new MarketIndexHistory($dateISO, 1, DataSource::ALL_JAMAICAN);
+        $summary = new MarketIndexHistory($dateISO, 3, DataSource::ALL_JAMAICAN);
         $summary->fetch();
     }
-    public function crossListedMarketIndexHistory() {
+
+    public function crossListedIndexHistory() {
         $dateISO = date("Y-m-d");
-        $summary = new MarketIndexHistory($dateISO, 1, DataSource::CROSS_LISTED);
+        $summary = new MarketIndexHistory($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
-    
-    public function mainMarketIndexComposition() {
+
+    public function mainIndexComposition() {
         $dateISO = date("Y-m-d");
-        $summary = new MarketIndexHistory($dateISO, 1, DataSource::CROSS_LISTED);
+        $summary = new MarketIndexComposition($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
+
+    public function jseSelectIndexComposition() {
+        $dateISO = date("Y-m-d");
+        $summary = new MarketIndexComposition($dateISO, 2, DataSource::JSE_SELECT);
+        $summary->fetch();
+    }
+
+    public function allJamaicanIndexComposition() {
+        $dateISO = date("Y-m-d");
+        $summary = new MarketIndexComposition($dateISO, 3, DataSource::ALL_JAMAICAN);
+        $summary->fetch();
+    }
+
+    public function crossListedIndexComposition() {
+        $dateISO = date("Y-m-d");
+        $summary = new MarketIndexComposition($dateISO, 4, DataSource::CROSS_LISTED);
+        $summary->fetch();
+    }
+
 }
