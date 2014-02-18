@@ -43,6 +43,21 @@ class BaseController extends CI_Controller {
         $this->output->set_output(json_encode($data));
     }
 
+    public function getMarketDate() {
+         $date = $this->input->get('date');
+         if(!$date){
+             return $this->getDate('c');
+         }
+         
+         return $date;
+    }
+
+    function getDate($format) {
+        $datetime = new DateTime($this->date);
+        $date = $datetime->format($format);
+        return substr($date, 0, 10);
+    }
+
 }
 
 ?>

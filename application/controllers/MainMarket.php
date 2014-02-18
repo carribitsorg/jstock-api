@@ -14,7 +14,7 @@ class MainMarket extends BaseController {
     }
 
     public function dailySummary() {
-        $dateISO = $this->input->get('date');
+        $dateISO = $this->getMarketDate();
 
         $this->model = new DailyMainSummaryModel();
 
@@ -34,8 +34,8 @@ class MainMarket extends BaseController {
     public function oneMonthGraph() {
         $this->clearBuffer();
 
-        $dateISO = $this->input->get('date');
-        $indexName = (string)$this->input->get('index_name');
+        $dateISO = $this->getMarketDate();
+        $indexName = (string) $this->input->get('index_name');
 
         $model = new MarketIndexChartModel();
         $data = $model->getOneMonthGraph($dateISO, $indexName);
@@ -48,11 +48,33 @@ class MainMarket extends BaseController {
     public function marketIndexDetails() {
         $this->clearBuffer();
 
-        $dateISO = $this->input->get('date');
-        $indexName = (string)$this->input->get('index_name');
+        $dateISO = $this->getMarketDate();
+        $indexName = (string) $this->input->get('index_name');
 
         $model = new MarketIndexChartModel();
         $data = $model->getMarketIndexDetails($dateISO, $indexName);
+
+        $this->toJson($data);
+    }
+
+    public function marketIndexFullDetails() {
+        $this->clearBuffer();
+        $dateISO = $this->getMarketDate();
+        $data = array();
+
+        $indexName = (string) $this->input->get('index_name');
+
+        $modelInfo = new MarketIndexChartModel();
+        $data['information'] = $modelInfo->getMarketIndexStockDetails($dateISO, $indexName);
+
+        $modelPerformance = new MarketIndexPerformanceModel();
+        $data['performance'] = $modelPerformance->getMarketIndexDetails($dateISO, $indexName);
+
+        $modelHistory = new MarketIndexHistoryModel();
+        $data['history'] = $modelHistory->getMarketIndexDetails($dateISO, $indexName);
+        
+        $modelComposition = new MarketIndexCompositionModel();
+        $data['composition'] = $modelComposition->getMarketIndexDetails($dateISO, $indexName);
 
         $this->toJson($data);
     }

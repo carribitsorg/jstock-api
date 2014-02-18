@@ -47,7 +47,20 @@ class MarketIndexChartModel extends CI_Model {
         }
         return array();
     }
+    
+    function getMarketIndexStockDetails($date, $indexName) {
+        $this->db->select('*');
+        $this->db->from('v_index_details');
+        $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
+        $this->db->limit(1);
 
+        $result = $this->db->get()->result_array();
+
+        if (is_array($result) && count($result) > 0) {
+            return $result[0];
+        }
+        return array();
+    }
 }
 
 ?>
