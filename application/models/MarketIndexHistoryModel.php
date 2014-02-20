@@ -23,15 +23,15 @@ class MarketIndexHistoryModel extends CI_Model {
     }
 
     function getMarketIndexDetails($date, $indexName) {
-        $this->db->select('value_date, index_name, value, change, change_perc,change_perc_dir, change_dir, vol');
-        $this->db->from('daily_market_report');
+        $this->db->select('*');
+        $this->db->from('v_daily_market_history');
         $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
-        $this->db->limit(1);
+        //$this->db->limit(1);
 
         $result = $this->db->get()->result_array();
 
         if (is_array($result) && count($result) > 0) {
-            return $result[0];
+            return $result;
         }
         return array();
     }

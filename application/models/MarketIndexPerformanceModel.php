@@ -23,7 +23,7 @@ class MarketIndexPerformanceModel extends CI_Model {
 
     function getMarketIndexDetails($date, $indexName) {
         $this->db->select('*');
-        $this->db->from('daily_market_perfromance');
+        $this->db->from('v_daily_market_perfromance');
         $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
         $this->db->limit(1);
 
