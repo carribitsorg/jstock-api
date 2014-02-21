@@ -72,11 +72,15 @@ class MainMarket extends BaseController {
 
         $modelHistory = new MarketIndexHistoryModel();
         $data['history'] = $modelHistory->getMarketIndexDetails($dateISO, $indexName);
-        
+
         $modelComposition = new MarketIndexCompositionModel();
         $data['composition'] = $modelComposition->getMarketIndexDetails($dateISO, $indexName);
 
         $this->toJson($data);
+    }
+
+    public function currentNews() {
+        
     }
 
 }

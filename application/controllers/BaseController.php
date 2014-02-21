@@ -2,6 +2,7 @@
 
 //require_once('application/simple_html_dom.php'); 
 require_once('application/third_party/pchart/StockGraph.php');
+require_once('application/third_party/simple/autoloader.php');
 
 class BaseController extends CI_Controller {
 
@@ -14,12 +15,14 @@ class BaseController extends CI_Controller {
         $this->load->library('MarketIndexPerformance');
         $this->load->library('MarketIndexHistory');
         $this->load->library('MarketIndexComposition');
+        $this->load->library('DailyCompanyNews');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
         $this->load->model('MarketIndexPerformanceModel');
         $this->load->model('MarketIndexHistoryModel');
         $this->load->model('MarketIndexCompositionModel');
+        $this->load->model('DailyCompanyNewsModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }
