@@ -36,4 +36,18 @@ class DailyCompanyNewsModel extends CI_Model {
         return array();
     }
 
+    function getNewsItem($id) {
+        $this->db->select('*');
+        $this->db->from('daily_news');
+        $this->db->where(array('id' => $id));
+        $this->db->limit(1);
+
+        $result = $this->db->get()->result_array();
+
+        if (is_array($result) && count($result) > 0) {
+            return $result[0];
+        }
+        return array();
+    }
+
 }

@@ -36,8 +36,8 @@ class DailyCompanyNews extends DataSource {
 
         $news = array();
         $feed = new SimplePie();
-        $feed->set_feed_url("http://jstock.com/rssfeed.xml");
-        //$feed->set_feed_url("http://www.jamstockex.com/rssfeed.php");
+        //$feed->set_feed_url("http://jstock.com/rssfeed.xml");
+        $feed->set_feed_url("http://www.jamstockex.com/rssfeed.php");
         $feed->enable_cache(false);
         $feed->set_output_encoding('Windows-1252');
         $feed->init();
@@ -68,8 +68,6 @@ class DailyCompanyNews extends DataSource {
 
             $this->data[] = $news;
         }
-
-        var_dump($this->data);
     }
 
     protected function save() {
