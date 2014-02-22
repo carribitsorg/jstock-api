@@ -15,13 +15,20 @@ class News extends BaseController {
 
     public function getDailyNews() {
         $this->clearBuffer();
+        
+        $news =array();
 
         $dateISO = $this->getMarketDate();
       
         $model = new DailyCompanyNewsModel();
         $data = $model->getNews($dateISO);
+        
+        foreach($data as $row)
+        {
+            $news[$row['date_iso']][] = $row;
+        }
 
-        $this->toJson($data);
+        $this->toJson($news);
     }
 
 }

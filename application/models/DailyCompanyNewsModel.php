@@ -26,6 +26,7 @@ class DailyCompanyNewsModel extends CI_Model {
         $this->db->select('*');
         $this->db->from('daily_news');
         $this->db->where(array('news_date' => $date));
+        $this->db->order_by('date_iso', 'desc');
 
         $result = $this->db->get()->result_array();
 
