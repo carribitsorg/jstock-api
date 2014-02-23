@@ -79,8 +79,18 @@ class MainMarket extends BaseController {
         $this->toJson($data);
     }
 
-    public function currentNews() {
-        
+    function dailyQuote() {
+        $this->clearBuffer();
+        $dateISO = $this->getMarketDate();
+        $data = array();
+
+        $model = new DailyQuoteModel();
+        $data['quote'] = $model->getQuote($dateISO);
+        $data['ordinary_shares'] = $model->getOrdinaryShares($dateISO);
+        $data['preference_shares'] = $model->getPreferenceShares($dateISO);
+        $data['us_denominated_shares'] = $model->getUsDenominatedShares($dateISO);
+
+        $this->toJson($data);
     }
 
 }
