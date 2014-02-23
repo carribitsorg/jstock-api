@@ -16,6 +16,7 @@ class BaseController extends CI_Controller {
         $this->load->library('MarketIndexHistory');
         $this->load->library('MarketIndexComposition');
         $this->load->library('DailyCompanyNews');
+        $this->load->library('DailyQuote');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
@@ -23,6 +24,7 @@ class BaseController extends CI_Controller {
         $this->load->model('MarketIndexHistoryModel');
         $this->load->model('MarketIndexCompositionModel');
         $this->load->model('DailyCompanyNewsModel');
+        $this->load->model('DailyQuoteModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }
@@ -52,6 +54,14 @@ class BaseController extends CI_Controller {
              return $this->getDate('c');
          }
          
+         return $date;
+    }
+    
+     public function getRunDate() {
+         $date = $this->input->get('date');
+         if(!$date){
+             return $this->getDate('c');
+         }
          return $date;
     }
 

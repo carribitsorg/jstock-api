@@ -14,7 +14,7 @@ class Trigger extends BaseController {
     }
 
     public function dailySummary() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $date = date("m/d/Y", strtotime($dateISO));
 
         $summary = new DailyMainMarketSummary($date);
@@ -22,103 +22,109 @@ class Trigger extends BaseController {
     }
 
     public function dailyNews() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $news = new DailyCompanyNews($dateISO);
+        $news->fetch();
+    }
+    
+    public function dailyQuote() {
+        $dateISO = $this->getRunDate();
+        $news = new DailyQuote($dateISO);
         $news->fetch();
     }
 
     public function mainIndexChart() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexChart($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
 
     public function jseSelectChart() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexChart($dateISO, 2, DataSource::JSE_SELECT);
         $summary->fetch();
     }
 
     public function allJamaicanChart() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexChart($dateISO, 3, DataSource::ALL_JAMAICAN);
         $summary->fetch();
     }
 
     public function crossListedChart() {
-       $dateISO = $this->getMarketDate();
+       $dateISO = $this->getRunDate();
         $summary = new MarketIndexChart($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
 
     public function mainIndexPerformance() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexPerformance($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
 
     public function jseSelectIndexPerformance() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexPerformance($dateISO, 2, DataSource::JSE_SELECT);
         $summary->fetch();
     }
 
     public function allJamaicanIndexPerformance() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexPerformance($dateISO, 3, DataSource::ALL_JAMAICAN);
         $summary->fetch();
     }
 
     public function crossListedIndexPerformance() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexPerformance($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
 
     public function mainMarketIndexHistory() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexHistory($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
 
     public function jseSelectIndexHistory() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexHistory($dateISO, 2, DataSource::JSE_SELECT);
         $summary->fetch();
     }
 
     public function allJamaicanIndexHistory() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexHistory($dateISO, 3, DataSource::ALL_JAMAICAN);
         $summary->fetch();
     }
 
     public function crossListedIndexHistory() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexHistory($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
 
     public function mainIndexComposition() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexComposition($dateISO, 1, DataSource::MAIN_INDEX);
         $summary->fetch();
     }
 
     public function jseSelectIndexComposition() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexComposition($dateISO, 2, DataSource::JSE_SELECT);
         $summary->fetch();
     }
 
     public function allJamaicanIndexComposition() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexComposition($dateISO, 3, DataSource::ALL_JAMAICAN);
         $summary->fetch();
     }
 
     public function crossListedIndexComposition() {
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexComposition($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }

@@ -36,7 +36,7 @@ class MarketIndexChartModel extends CI_Model {
 
     function getMarketIndexDetails($date, $indexName) {
         $this->db->select('value_date, index_name, value, change, change_perc,change_perc_dir, change_dir, vol');
-        $this->db->from('daily_market_report');
+        $this->db->from('v_daily_market_report');
         $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
         $this->db->limit(1);
 
