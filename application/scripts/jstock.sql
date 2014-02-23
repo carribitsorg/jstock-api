@@ -194,8 +194,14 @@ DROP TABLE IF EXISTS `daily_quote_main`;
 CREATE TABLE `daily_quote_main` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `report_date` date NOT NULL,
+  `index` varchar(64) DEFAULT NULL,
+  `value` decimal(18,2) DEFAULT NULL,
+  `volume` decimal(18,0) DEFAULT NULL,
+  `change` decimal(18,2) DEFAULT NULL,
+  `change_perc` decimal(18,2) DEFAULT NULL,
+  `direction` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +210,121 @@ CREATE TABLE `daily_quote_main` (
 
 LOCK TABLES `daily_quote_main` WRITE;
 /*!40000 ALTER TABLE `daily_quote_main` DISABLE KEYS */;
+INSERT INTO `daily_quote_main` VALUES (1,'2014-02-22','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(2,'2014-02-22','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(3,'2014-02-22','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(4,'2014-02-22','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(5,'2014-02-22','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(6,'2014-02-22','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(7,'2014-02-22','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(8,'2014-02-22','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(9,'2014-02-22','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(10,'2014-02-22','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(11,'2014-02-22','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(12,'2014-02-22','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(13,'2014-02-22','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(14,'2014-02-22','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(15,'2014-02-22','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(16,'2014-02-22','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(17,'2014-02-22','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(18,'2014-02-22','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(19,'2014-02-22','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(20,'2014-02-22','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(21,'2014-02-22','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(22,'2014-02-22','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(23,'2014-02-22','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(24,'2014-02-22','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(25,'2014-02-22','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(26,'2014-02-22','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(27,'2014-02-22','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(28,'2014-02-22','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(29,'2014-02-22','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(30,'2014-02-22','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(31,'2014-02-22','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(32,'2014-02-22','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(33,'2014-02-22','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(34,'2014-02-22','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(35,'2014-02-22','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(36,'2014-02-23','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(37,'2014-02-23','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(38,'2014-02-23','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(39,'2014-02-23','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(40,'2014-02-23','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(41,'2014-02-23','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(42,'2014-02-23','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(43,'2014-02-23','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(44,'2014-02-23','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(45,'2014-02-23','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(46,'2014-02-23','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(47,'2014-02-23','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(48,'2014-02-23','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(49,'2014-02-23','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(50,'2014-02-23','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(51,'2014-02-23','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(52,'2014-02-23','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(53,'2014-02-23','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(54,'2014-02-23','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(55,'2014-02-23','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(56,'2014-02-23','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif'),(57,'2014-02-23','JSE Market Index',79531.75,5706858,168.44,0.21,'images/mov_up.gif'),(58,'2014-02-23','JSE Select Index',2281.99,5449270,19.16,0.85,'images/mov_up.gif'),(59,'2014-02-23','JSE All Jamaican Composite',84535.18,5678403,595.32,0.71,'images/mov_up.gif'),(60,'2014-02-23','JSE Cross Listed Index',660.58,25455,-6.22,-0.93,'images/mov_down.gif'),(61,'2014-02-23','JSE Junior Market Index',740.55,1167415,-2.79,-0.38,'images/mov_down.gif'),(62,'2014-02-23','JSE Combined Index',81750.55,6871273,143.53,0.18,'images/mov_up.gif'),(63,'2014-02-23','JSE US Equities Index',128.50,580,2.64,2.10,'images/mov_up.gif');
 /*!40000 ALTER TABLE `daily_quote_main` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `daily_quote_ordinary_shares`
+--
+
+DROP TABLE IF EXISTS `daily_quote_ordinary_shares`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `daily_quote_ordinary_shares` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `report_date` date DEFAULT NULL,
+  `week_high_52` decimal(11,2) DEFAULT NULL,
+  `week_low_52` decimal(11,2) DEFAULT NULL,
+  `security` varchar(64) DEFAULT NULL,
+  `prev_yr_div` decimal(11,2) DEFAULT NULL,
+  `current_yr_div` decimal(11,2) DEFAULT NULL,
+  `volume_non_block` decimal(18,0) DEFAULT NULL,
+  `today_high` decimal(11,2) DEFAULT NULL,
+  `today_low` decimal(11,2) DEFAULT NULL,
+  `last_traded_price` decimal(11,2) DEFAULT NULL,
+  `close_price` decimal(11,2) DEFAULT NULL,
+  `change` decimal(11,2) DEFAULT NULL,
+  `closing_bid` decimal(11,2) DEFAULT NULL,
+  `closing_ask` decimal(11,2) DEFAULT NULL,
+  `direction` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `daily_quote_ordinary_shares`
+--
+
+LOCK TABLES `daily_quote_ordinary_shares` WRITE;
+/*!40000 ALTER TABLE `daily_quote_ordinary_shares` DISABLE KEYS */;
+INSERT INTO `daily_quote_ordinary_shares` VALUES (1,'2014-02-23',3.50,2.00,'BIL',0.11,0.03,0,0.00,0.00,2.50,2.50,0.00,2.00,2.50,'images/mov_none.gif'),(2,'2014-02-23',2.51,1.71,'BRG',0.13,0.00,0,0.00,0.00,1.85,1.85,0.00,1.75,1.85,'images/mov_none.gif'),(3,'2014-02-23',5.25,0.60,'CCC',0.00,0.00,2100,4.97,4.97,4.97,4.97,0.27,4.70,4.97,'images/mov_up.gif'),(4,'2014-02-23',61.00,33.50,'CAR',6.84,1.18,980789,36.10,36.00,36.01,36.00,0.00,35.14,35.90,'images/mov_none.gif'),(5,'2014-02-23',0.10,0.02,'CBNY',0.00,0.00,0,0.00,0.00,0.10,0.10,0.00,0.06,0.08,'images/mov_none.gif'),(6,'2014-02-23',5.50,3.80,'DG',0.35,0.00,2015946,5.01,5.00,5.00,5.00,-0.01,4.80,5.00,'images/mov_down.gif'),(7,'2014-02-23',113.00,80.00,'FCIB',0.03,0.02,25455,80.00,80.00,80.00,80.00,-0.78,80.00,90.00,'images/mov_down.gif'),(8,'2014-02-23',1.26,1.10,'GLNR',0.07,0.00,0,0.00,0.00,1.15,1.15,0.00,1.10,1.15,'images/mov_none.gif'),(9,'2014-02-23',63.00,47.30,'GK',2.18,0.00,3808,55.00,54.55,54.56,54.74,-0.76,54.56,55.50,'images/mov_down.gif'),(10,'2014-02-23',9.00,3.22,'HL',0.13,0.30,0,0.00,0.00,8.10,8.10,0.00,6.10,8.00,'images/mov_none.gif'),(11,'2014-02-23',5.30,3.90,'JBG',0.14,0.00,31950,4.90,4.80,4.82,4.84,0.01,4.80,4.90,'images/mov_up.gif'),(12,'2014-02-23',9.50,5.89,'JMMB',0.26,0.00,3528,7.50,7.49,7.49,7.49,-0.01,7.40,7.50,'images/mov_down.gif'),(13,'2014-02-23',20.70,15.00,'JP',0.20,0.20,0,0.00,0.00,18.26,18.26,0.00,18.26,19.80,'images/mov_none.gif'),(14,'2014-02-23',3.25,1.80,'JSE',0.00,0.00,0,0.00,0.00,2.10,2.10,0.00,1.90,2.10,'images/mov_none.gif'),(15,'2014-02-23',4.51,3.75,'KPREIT',0.00,0.00,0,0.00,0.00,4.00,4.00,0.00,4.05,0.00,'images/mov_none.gif'),(16,'2014-02-23',8.00,5.30,'KW',0.18,0.00,0,0.00,0.00,6.00,6.00,0.00,6.00,6.06,'images/mov_none.gif'),(17,'2014-02-23',0.37,0.13,'LIME',0.00,0.00,718201,0.36,0.35,0.35,0.35,-0.01,0.32,0.38,'images/mov_down.gif'),(18,'2014-02-23',2.70,1.81,'MIL',0.00,0.00,0,0.00,0.00,1.89,1.90,0.00,1.87,2.00,'images/mov_none.gif'),(19,'2014-02-23',18.00,17.95,'MBICE',0.00,0.00,0,0.00,0.00,17.95,17.95,0.00,0.00,17.50,'images/mov_none.gif'),(20,'2014-02-23',22.00,16.00,'NCBJ',0.63,0.32,1590083,19.00,18.60,19.00,19.00,0.97,18.20,19.00,'images/mov_up.gif'),(21,'2014-02-23',95.00,95.00,'PAL',1.75,1.75,0,0.00,0.00,95.00,95.00,0.00,45.00,120.00,'images/mov_none.gif'),(22,'2014-02-23',57.60,48.00,'PJAM',2.05,0.00,350,48.99,48.99,48.99,48.99,-0.01,48.06,49.00,'images/mov_down.gif'),(23,'2014-02-23',1.60,0.85,'PULS',0.00,0.00,0,0.00,0.00,0.99,0.99,0.00,0.87,1.00,'images/mov_none.gif'),(24,'2014-02-23',1.90,1.20,'RJR',0.00,0.00,0,0.00,0.00,1.60,1.60,0.00,1.35,1.79,'images/mov_none.gif'),(25,'2014-02-23',10.60,8.05,'SJ',0.00,0.00,169967,9.15,9.00,9.15,9.12,-0.02,8.60,9.50,'images/mov_down.gif'),(26,'2014-02-23',20.00,14.00,'S',0.60,0.91,0,0.00,0.00,18.00,18.00,0.00,17.00,18.00,'images/mov_none.gif'),(27,'2014-02-23',7.10,5.07,'XFUND',0.00,0.00,39216,7.00,7.00,7.00,7.00,0.00,7.00,7.20,'images/mov_none.gif'),(28,'2014-02-23',10.00,8.00,'SALF',0.80,0.00,0,0.00,0.00,9.00,9.00,0.00,9.00,9.99,'images/mov_none.gif'),(29,'2014-02-23',22.84,17.00,'SGJ',1.60,0.40,45965,21.10,20.70,20.70,20.99,-0.06,20.70,21.00,'images/mov_down.gif'),(30,'2014-02-23',29.50,22.00,'SIJL',1.80,0.45,16550,26.00,25.99,25.99,26.00,0.00,25.73,26.00,'images/mov_none.gif'),(31,'2014-02-23',15.01,10.00,'SEP',0.83,0.00,950,11.00,11.00,11.00,11.00,0.09,10.90,11.50,'images/mov_up.gif'),(32,'2014-02-23',3.10,2.20,'SVL',0.21,0.03,59000,2.43,2.40,2.40,2.41,0.02,2.40,3.20,'images/mov_up.gif'),(33,'2014-02-23',18.33,15.58,'TCL',0.00,0.00,0,0.00,0.00,17.61,17.61,0.00,15.00,0.00,'images/mov_none.gif'),(34,'2014-02-23',3.50,2.00,'BIL',0.11,0.03,0,0.00,0.00,2.50,2.50,0.00,2.00,2.50,'images/mov_none.gif'),(35,'2014-02-23',2.51,1.71,'BRG',0.13,0.00,0,0.00,0.00,1.85,1.85,0.00,1.75,1.85,'images/mov_none.gif'),(36,'2014-02-23',5.25,0.60,'CCC',0.00,0.00,2100,4.97,4.97,4.97,4.97,0.27,4.70,4.97,'images/mov_up.gif'),(37,'2014-02-23',61.00,33.50,'CAR',6.84,1.18,980789,36.10,36.00,36.01,36.00,0.00,35.14,35.90,'images/mov_none.gif'),(38,'2014-02-23',0.10,0.02,'CBNY',0.00,0.00,0,0.00,0.00,0.10,0.10,0.00,0.06,0.08,'images/mov_none.gif'),(39,'2014-02-23',5.50,3.80,'DG',0.35,0.00,2015946,5.01,5.00,5.00,5.00,-0.01,4.80,5.00,'images/mov_down.gif'),(40,'2014-02-23',113.00,80.00,'FCIB',0.03,0.02,25455,80.00,80.00,80.00,80.00,-0.78,80.00,90.00,'images/mov_down.gif'),(41,'2014-02-23',1.26,1.10,'GLNR',0.07,0.00,0,0.00,0.00,1.15,1.15,0.00,1.10,1.15,'images/mov_none.gif'),(42,'2014-02-23',63.00,47.30,'GK',2.18,0.00,3808,55.00,54.55,54.56,54.74,-0.76,54.56,55.50,'images/mov_down.gif'),(43,'2014-02-23',9.00,3.22,'HL',0.13,0.30,0,0.00,0.00,8.10,8.10,0.00,6.10,8.00,'images/mov_none.gif'),(44,'2014-02-23',5.30,3.90,'JBG',0.14,0.00,31950,4.90,4.80,4.82,4.84,0.01,4.80,4.90,'images/mov_up.gif'),(45,'2014-02-23',9.50,5.89,'JMMB',0.26,0.00,3528,7.50,7.49,7.49,7.49,-0.01,7.40,7.50,'images/mov_down.gif'),(46,'2014-02-23',20.70,15.00,'JP',0.20,0.20,0,0.00,0.00,18.26,18.26,0.00,18.26,19.80,'images/mov_none.gif'),(47,'2014-02-23',3.25,1.80,'JSE',0.00,0.00,0,0.00,0.00,2.10,2.10,0.00,1.90,2.10,'images/mov_none.gif'),(48,'2014-02-23',4.51,3.75,'KPREIT',0.00,0.00,0,0.00,0.00,4.00,4.00,0.00,4.05,0.00,'images/mov_none.gif'),(49,'2014-02-23',8.00,5.30,'KW',0.18,0.00,0,0.00,0.00,6.00,6.00,0.00,6.00,6.06,'images/mov_none.gif'),(50,'2014-02-23',0.37,0.13,'LIME',0.00,0.00,718201,0.36,0.35,0.35,0.35,-0.01,0.32,0.38,'images/mov_down.gif'),(51,'2014-02-23',2.70,1.81,'MIL',0.00,0.00,0,0.00,0.00,1.89,1.90,0.00,1.87,2.00,'images/mov_none.gif'),(52,'2014-02-23',18.00,17.95,'MBICE',0.00,0.00,0,0.00,0.00,17.95,17.95,0.00,0.00,17.50,'images/mov_none.gif'),(53,'2014-02-23',22.00,16.00,'NCBJ',0.63,0.32,1590083,19.00,18.60,19.00,19.00,0.97,18.20,19.00,'images/mov_up.gif'),(54,'2014-02-23',95.00,95.00,'PAL',1.75,1.75,0,0.00,0.00,95.00,95.00,0.00,45.00,120.00,'images/mov_none.gif'),(55,'2014-02-23',57.60,48.00,'PJAM',2.05,0.00,350,48.99,48.99,48.99,48.99,-0.01,48.06,49.00,'images/mov_down.gif'),(56,'2014-02-23',1.60,0.85,'PULS',0.00,0.00,0,0.00,0.00,0.99,0.99,0.00,0.87,1.00,'images/mov_none.gif'),(57,'2014-02-23',1.90,1.20,'RJR',0.00,0.00,0,0.00,0.00,1.60,1.60,0.00,1.35,1.79,'images/mov_none.gif'),(58,'2014-02-23',10.60,8.05,'SJ',0.00,0.00,169967,9.15,9.00,9.15,9.12,-0.02,8.60,9.50,'images/mov_down.gif'),(59,'2014-02-23',20.00,14.00,'S',0.60,0.91,0,0.00,0.00,18.00,18.00,0.00,17.00,18.00,'images/mov_none.gif'),(60,'2014-02-23',7.10,5.07,'XFUND',0.00,0.00,39216,7.00,7.00,7.00,7.00,0.00,7.00,7.20,'images/mov_none.gif'),(61,'2014-02-23',10.00,8.00,'SALF',0.80,0.00,0,0.00,0.00,9.00,9.00,0.00,9.00,9.99,'images/mov_none.gif'),(62,'2014-02-23',22.84,17.00,'SGJ',1.60,0.40,45965,21.10,20.70,20.70,20.99,-0.06,20.70,21.00,'images/mov_down.gif'),(63,'2014-02-23',29.50,22.00,'SIJL',1.80,0.45,16550,26.00,25.99,25.99,26.00,0.00,25.73,26.00,'images/mov_none.gif'),(64,'2014-02-23',15.01,10.00,'SEP',0.83,0.00,950,11.00,11.00,11.00,11.00,0.09,10.90,11.50,'images/mov_up.gif'),(65,'2014-02-23',3.10,2.20,'SVL',0.21,0.03,59000,2.43,2.40,2.40,2.41,0.02,2.40,3.20,'images/mov_up.gif'),(66,'2014-02-23',18.33,15.58,'TCL',0.00,0.00,0,0.00,0.00,17.61,17.61,0.00,15.00,0.00,'images/mov_none.gif'),(67,'2014-02-23',3.50,2.00,'BIL',0.11,0.03,0,0.00,0.00,2.50,2.50,0.00,2.00,2.50,'images/mov_none.gif'),(68,'2014-02-23',2.51,1.71,'BRG',0.13,0.00,0,0.00,0.00,1.85,1.85,0.00,1.75,1.85,'images/mov_none.gif'),(69,'2014-02-23',5.25,0.60,'CCC',0.00,0.00,2100,4.97,4.97,4.97,4.97,0.27,4.70,4.97,'images/mov_up.gif'),(70,'2014-02-23',61.00,33.50,'CAR',6.84,1.18,980789,36.10,36.00,36.01,36.00,0.00,35.14,35.90,'images/mov_none.gif'),(71,'2014-02-23',0.10,0.02,'CBNY',0.00,0.00,0,0.00,0.00,0.10,0.10,0.00,0.06,0.08,'images/mov_none.gif'),(72,'2014-02-23',5.50,3.80,'DG',0.35,0.00,2015946,5.01,5.00,5.00,5.00,-0.01,4.80,5.00,'images/mov_down.gif'),(73,'2014-02-23',113.00,80.00,'FCIB',0.03,0.02,25455,80.00,80.00,80.00,80.00,-0.78,80.00,90.00,'images/mov_down.gif'),(74,'2014-02-23',1.26,1.10,'GLNR',0.07,0.00,0,0.00,0.00,1.15,1.15,0.00,1.10,1.15,'images/mov_none.gif'),(75,'2014-02-23',63.00,47.30,'GK',2.18,0.00,3808,55.00,54.55,54.56,54.74,-0.76,54.56,55.50,'images/mov_down.gif'),(76,'2014-02-23',9.00,3.22,'HL',0.13,0.30,0,0.00,0.00,8.10,8.10,0.00,6.10,8.00,'images/mov_none.gif'),(77,'2014-02-23',5.30,3.90,'JBG',0.14,0.00,31950,4.90,4.80,4.82,4.84,0.01,4.80,4.90,'images/mov_up.gif'),(78,'2014-02-23',9.50,5.89,'JMMB',0.26,0.00,3528,7.50,7.49,7.49,7.49,-0.01,7.40,7.50,'images/mov_down.gif'),(79,'2014-02-23',20.70,15.00,'JP',0.20,0.20,0,0.00,0.00,18.26,18.26,0.00,18.26,19.80,'images/mov_none.gif'),(80,'2014-02-23',3.25,1.80,'JSE',0.00,0.00,0,0.00,0.00,2.10,2.10,0.00,1.90,2.10,'images/mov_none.gif'),(81,'2014-02-23',4.51,3.75,'KPREIT',0.00,0.00,0,0.00,0.00,4.00,4.00,0.00,4.05,0.00,'images/mov_none.gif'),(82,'2014-02-23',8.00,5.30,'KW',0.18,0.00,0,0.00,0.00,6.00,6.00,0.00,6.00,6.06,'images/mov_none.gif'),(83,'2014-02-23',0.37,0.13,'LIME',0.00,0.00,718201,0.36,0.35,0.35,0.35,-0.01,0.32,0.38,'images/mov_down.gif'),(84,'2014-02-23',2.70,1.81,'MIL',0.00,0.00,0,0.00,0.00,1.89,1.90,0.00,1.87,2.00,'images/mov_none.gif'),(85,'2014-02-23',18.00,17.95,'MBICE',0.00,0.00,0,0.00,0.00,17.95,17.95,0.00,0.00,17.50,'images/mov_none.gif'),(86,'2014-02-23',22.00,16.00,'NCBJ',0.63,0.32,1590083,19.00,18.60,19.00,19.00,0.97,18.20,19.00,'images/mov_up.gif'),(87,'2014-02-23',95.00,95.00,'PAL',1.75,1.75,0,0.00,0.00,95.00,95.00,0.00,45.00,120.00,'images/mov_none.gif'),(88,'2014-02-23',57.60,48.00,'PJAM',2.05,0.00,350,48.99,48.99,48.99,48.99,-0.01,48.06,49.00,'images/mov_down.gif'),(89,'2014-02-23',1.60,0.85,'PULS',0.00,0.00,0,0.00,0.00,0.99,0.99,0.00,0.87,1.00,'images/mov_none.gif'),(90,'2014-02-23',1.90,1.20,'RJR',0.00,0.00,0,0.00,0.00,1.60,1.60,0.00,1.35,1.79,'images/mov_none.gif'),(91,'2014-02-23',10.60,8.05,'SJ',0.00,0.00,169967,9.15,9.00,9.15,9.12,-0.02,8.60,9.50,'images/mov_down.gif'),(92,'2014-02-23',20.00,14.00,'S',0.60,0.91,0,0.00,0.00,18.00,18.00,0.00,17.00,18.00,'images/mov_none.gif'),(93,'2014-02-23',7.10,5.07,'XFUND',0.00,0.00,39216,7.00,7.00,7.00,7.00,0.00,7.00,7.20,'images/mov_none.gif'),(94,'2014-02-23',10.00,8.00,'SALF',0.80,0.00,0,0.00,0.00,9.00,9.00,0.00,9.00,9.99,'images/mov_none.gif'),(95,'2014-02-23',22.84,17.00,'SGJ',1.60,0.40,45965,21.10,20.70,20.70,20.99,-0.06,20.70,21.00,'images/mov_down.gif'),(96,'2014-02-23',29.50,22.00,'SIJL',1.80,0.45,16550,26.00,25.99,25.99,26.00,0.00,25.73,26.00,'images/mov_none.gif'),(97,'2014-02-23',15.01,10.00,'SEP',0.83,0.00,950,11.00,11.00,11.00,11.00,0.09,10.90,11.50,'images/mov_up.gif'),(98,'2014-02-23',3.10,2.20,'SVL',0.21,0.03,59000,2.43,2.40,2.40,2.41,0.02,2.40,3.20,'images/mov_up.gif'),(99,'2014-02-23',18.33,15.58,'TCL',0.00,0.00,0,0.00,0.00,17.61,17.61,0.00,15.00,0.00,'images/mov_none.gif');
+/*!40000 ALTER TABLE `daily_quote_ordinary_shares` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `daily_quote_preference_shares`
+--
+
+DROP TABLE IF EXISTS `daily_quote_preference_shares`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `daily_quote_preference_shares` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `report_date` date DEFAULT NULL,
+  `week_high_52` decimal(11,2) DEFAULT NULL,
+  `week_low_52` decimal(11,2) DEFAULT NULL,
+  `security` varchar(64) DEFAULT NULL,
+  `prev_yr_div` decimal(11,2) DEFAULT NULL,
+  `current_yr_div` decimal(11,2) DEFAULT NULL,
+  `volume_non_block` decimal(18,0) DEFAULT NULL,
+  `today_high` decimal(11,2) DEFAULT NULL,
+  `today_low` decimal(11,2) DEFAULT NULL,
+  `last_traded_price` decimal(11,2) DEFAULT NULL,
+  `close_price` decimal(11,2) DEFAULT NULL,
+  `change` decimal(11,2) DEFAULT NULL,
+  `closing_bid` decimal(11,2) DEFAULT NULL,
+  `closing_ask` decimal(11,2) DEFAULT NULL,
+  `direction` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `daily_quote_preference_shares`
+--
+
+LOCK TABLES `daily_quote_preference_shares` WRITE;
+/*!40000 ALTER TABLE `daily_quote_preference_shares` DISABLE KEYS */;
+INSERT INTO `daily_quote_preference_shares` VALUES (1,'2014-02-23',0.50,0.50,'CWJA5.5',0.00,0.00,0,0.00,0.00,0.50,0.50,0.00,0.00,0.00,'images/mov_none.gif'),(2,'2014-02-23',0.53,0.53,'CWJA6',0.00,0.00,0,0.00,0.00,0.53,0.53,0.00,0.53,0.00,'images/mov_none.gif'),(3,'2014-02-23',0.35,0.35,'JPS5D',0.10,0.00,0,0.00,0.00,0.35,0.35,0.00,0.35,0.00,'images/mov_none.gif'),(4,'2014-02-23',0.39,0.39,'JPS7',0.14,0.00,0,0.00,0.00,0.39,0.39,0.00,0.40,0.00,'images/mov_none.gif'),(5,'2014-02-23',0.00,0.00,'JPS9.5',0.00,0.00,0,0.00,0.00,0.00,1050.14,0.00,0.00,0.00,'images/mov_none.gif'),(6,'2014-02-23',0.36,0.36,'JPS5C',0.10,0.00,0,0.00,0.00,0.36,0.36,0.00,0.36,0.00,'images/mov_none.gif'),(7,'2014-02-23',2.50,2.50,'JMMB7.25',0.05,0.02,0,0.00,0.00,2.50,2.50,0.00,0.00,2.50,'images/mov_none.gif'),(8,'2014-02-23',2.00,2.00,'JMMB7.5',0.04,0.01,0,0.00,0.00,2.00,2.00,0.00,0.00,2.00,'images/mov_none.gif'),(9,'2014-02-23',3.30,2.90,'JMMB8.75',0.26,0.04,3000,3.01,3.01,3.01,3.01,0.00,3.00,3.01,'images/mov_none.gif'),(10,'2014-02-23',3.70,3.50,'JMMB8.5',0.30,0.05,0,0.00,0.00,3.50,3.50,0.00,3.49,3.50,'images/mov_none.gif'),(11,'2014-02-23',0.40,0.40,'JPS6',0.12,0.00,0,0.00,0.00,0.40,0.40,0.00,0.40,0.00,'images/mov_none.gif'),(12,'2014-02-23',5.11,5.03,'PROVEN8',0.40,0.00,0,0.00,0.00,5.09,5.09,0.00,0.00,5.09,'images/mov_none.gif'),(13,'2014-02-23',0.50,0.50,'CWJA5.5',0.00,0.00,0,0.00,0.00,0.50,0.50,0.00,0.00,0.00,'images/mov_none.gif'),(14,'2014-02-23',0.53,0.53,'CWJA6',0.00,0.00,0,0.00,0.00,0.53,0.53,0.00,0.53,0.00,'images/mov_none.gif'),(15,'2014-02-23',0.35,0.35,'JPS5D',0.10,0.00,0,0.00,0.00,0.35,0.35,0.00,0.35,0.00,'images/mov_none.gif'),(16,'2014-02-23',0.39,0.39,'JPS7',0.14,0.00,0,0.00,0.00,0.39,0.39,0.00,0.40,0.00,'images/mov_none.gif'),(17,'2014-02-23',0.00,0.00,'JPS9.5',0.00,0.00,0,0.00,0.00,0.00,1050.14,0.00,0.00,0.00,'images/mov_none.gif'),(18,'2014-02-23',0.36,0.36,'JPS5C',0.10,0.00,0,0.00,0.00,0.36,0.36,0.00,0.36,0.00,'images/mov_none.gif'),(19,'2014-02-23',2.50,2.50,'JMMB7.25',0.05,0.02,0,0.00,0.00,2.50,2.50,0.00,0.00,2.50,'images/mov_none.gif'),(20,'2014-02-23',2.00,2.00,'JMMB7.5',0.04,0.01,0,0.00,0.00,2.00,2.00,0.00,0.00,2.00,'images/mov_none.gif'),(21,'2014-02-23',3.30,2.90,'JMMB8.75',0.26,0.04,3000,3.01,3.01,3.01,3.01,0.00,3.00,3.01,'images/mov_none.gif'),(22,'2014-02-23',3.70,3.50,'JMMB8.5',0.30,0.05,0,0.00,0.00,3.50,3.50,0.00,3.49,3.50,'images/mov_none.gif'),(23,'2014-02-23',0.40,0.40,'JPS6',0.12,0.00,0,0.00,0.00,0.40,0.40,0.00,0.40,0.00,'images/mov_none.gif'),(24,'2014-02-23',5.11,5.03,'PROVEN8',0.40,0.00,0,0.00,0.00,5.09,5.09,0.00,0.00,5.09,'images/mov_none.gif');
+/*!40000 ALTER TABLE `daily_quote_preference_shares` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `daily_quote_us_denominated_shares`
+--
+
+DROP TABLE IF EXISTS `daily_quote_us_denominated_shares`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `daily_quote_us_denominated_shares` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `report_date` date DEFAULT NULL,
+  `week_high_52` decimal(11,2) DEFAULT NULL,
+  `week_low_52` decimal(11,2) DEFAULT NULL,
+  `security` varchar(64) DEFAULT NULL,
+  `prev_yr_div` decimal(11,2) DEFAULT NULL,
+  `current_yr_div` decimal(11,2) DEFAULT NULL,
+  `volume_non_block` decimal(18,0) DEFAULT NULL,
+  `today_high` decimal(11,2) DEFAULT NULL,
+  `today_low` decimal(11,2) DEFAULT NULL,
+  `last_traded_price` decimal(11,2) DEFAULT NULL,
+  `close_price` decimal(11,2) DEFAULT NULL,
+  `change` decimal(11,2) DEFAULT NULL,
+  `closing_bid` decimal(11,2) DEFAULT NULL,
+  `closing_ask` decimal(11,2) DEFAULT NULL,
+  `direction` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `daily_quote_us_denominated_shares`
+--
+
+LOCK TABLES `daily_quote_us_denominated_shares` WRITE;
+/*!40000 ALTER TABLE `daily_quote_us_denominated_shares` DISABLE KEYS */;
+/*!40000 ALTER TABLE `daily_quote_us_denominated_shares` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -481,4 +601,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-22 20:08:49
+-- Dump completed on 2014-02-23  0:25:18

@@ -17,9 +17,26 @@ class DailyQuoteModel extends CI_Model {
     }
 
     function saveQuoteMain($data) {
-        var_dump($data);exit;
         foreach ($data as $row) {
             $this->db->insert('daily_quote_main', $row);
+        }
+    }
+    
+    function saveOrdinaryShares($data) {
+        foreach ($data as $row) {
+            $this->db->insert('daily_quote_ordinary_shares', $row);
+        }
+    }
+    
+    function savePreferenceShares($data) {
+        foreach ($data as $row) {
+            $this->db->insert('daily_quote_preference_shares', $row);
+        }
+    }
+    
+    function saveUsDenominatedShares($data) {
+        foreach ($data as $row) {
+            $this->db->insert('daily_quote_preference_shares', $row);
         }
     }
 
