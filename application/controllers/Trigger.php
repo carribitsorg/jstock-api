@@ -32,6 +32,11 @@ class Trigger extends BaseController {
         $news = new DailyQuote($dateISO);
         $news->fetch();
     }
+    
+    public function refreshSymbol() {
+        $news = new Symbol();
+        $news->fetch();
+    }
 
     public function mainIndexChart() {
         $dateISO = $this->getRunDate();

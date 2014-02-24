@@ -7,6 +7,7 @@ require_once('application/third_party/simple/autoloader.php');
 class BaseController extends CI_Controller {
 
     public function __construct() {
+        ob_start();
         parent::__construct();
 
         $this->load->library('DataSource');
@@ -17,6 +18,7 @@ class BaseController extends CI_Controller {
         $this->load->library('MarketIndexComposition');
         $this->load->library('DailyCompanyNews');
         $this->load->library('DailyQuote');
+        $this->load->library('Symbol');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
@@ -25,6 +27,7 @@ class BaseController extends CI_Controller {
         $this->load->model('MarketIndexCompositionModel');
         $this->load->model('DailyCompanyNewsModel');
         $this->load->model('DailyQuoteModel');
+        $this->load->model('SymbolLookupModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }
