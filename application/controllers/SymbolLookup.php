@@ -13,12 +13,9 @@ class SymbolLookup extends BaseController {
         
     }
 
-    public function refreshSymbol() {
-        $model = new SymbolLookup();
-        $data = $model->getNewsItem($id);
-        
-        $data['full_date'] = 'Published ' .  date("l, F j, Y", strtotime($data['date_iso']));
-
+    public function allSymbols() {
+        $model = new SymbolLookupModel();
+        $data = $model->getAllSymbol();
         $this->toJson($data);
     }
 
