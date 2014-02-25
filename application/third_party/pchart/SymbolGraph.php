@@ -28,7 +28,7 @@ class SymbolGraph {
 
         $MyData->setAxisDisplay(0, AXIS_FORMAT_CUSTOM, "YAxisFormatSymbol");
         $MyData->setAxisColor(0, array("R" => 96, "G" => 96, "B" => 96));
-
+        
 
 
         /* Create the pChart object */
@@ -37,22 +37,20 @@ class SymbolGraph {
 
         /* Turn of Antialiasing */
         $myPicture->Antialias = FALSE;
-        $serieSettings = array("R" => 255, "G" => 69, "B" => 0);
+        $serieSettings = array("R" => 109, "G" => 152, "B" => 171);
         $MyData->setPalette("Stocks", $serieSettings);
 
         $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 6, "R" => 110, "G" => 110, "B" => 110));
 
         /* Define the chart area */
-        $myPicture->setGraphArea(45, 0, 310, 170);
+        $myPicture->setGraphArea(45, 5, 310, 160);
 
         /* Draw the scale */
-        $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
+        $scaleSettings = array("Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "CycleBackground" => TRUE);
         $myPicture->drawScale($scaleSettings);
 
-        /* Turn on shadow computing */
-        $myPicture->setShadow(TRUE, array("X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10));
-
         $myPicture->Antialias = TRUE;
+        $myPicture->drawText(150, 178, "Year");
 
         /* Draw the area chart */
         $MyData->setSerieDrawable("Stocks", TRUE);

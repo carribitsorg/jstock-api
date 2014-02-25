@@ -22,7 +22,7 @@ class SymbolDetailModel extends CI_Model {
 
     function getStockDetails($date, $stockCode) {
         $this->db->select('*');
-        $this->db->from('stock_detail');
+        $this->db->from('v_stock_detail');
         $this->db->where(array('cache_date' => $date, 'stock_code' => $stockCode));
         $this->db->limit(1);
 

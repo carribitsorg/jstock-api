@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2014 at 10:04 PM
+-- Generation Time: Feb 26, 2014 at 12:10 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `jstock`
 --
-use jstock;
+
 -- --------------------------------------------------------
 
 --
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `daily_quote_main` (
   `change_perc` decimal(18,2) DEFAULT NULL,
   `direction` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `daily_quote_main`
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `daily_quote_ordinary_shares` (
   `closing_ask` decimal(11,2) DEFAULT NULL,
   `direction` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `daily_quote_ordinary_shares`
@@ -620,6 +620,47 @@ INSERT INTO `daily_summary_master` (`summary_date`, `cache_date`, `status`, `sum
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `stock_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `stock_detail` (
+  `stock_code` varchar(32) NOT NULL,
+  `cache_date` date NOT NULL,
+  `symbol` varchar(32) NOT NULL,
+  `financial_year_end` varchar(64) NOT NULL,
+  `last_traded_price` varchar(16) NOT NULL,
+  `close_price` varchar(64) NOT NULL,
+  `change` varchar(64) NOT NULL,
+  `change_perc` varchar(64) NOT NULL,
+  `shares_outstanding` varchar(64) NOT NULL,
+  `market_value_of_shares_outstanding` varchar(64) NOT NULL,
+  `bid` varchar(64) NOT NULL,
+  `week_to_date` varchar(64) NOT NULL,
+  `ask` varchar(64) NOT NULL,
+  `month_to_date` varchar(64) NOT NULL,
+  `open_previous_day_close` varchar(64) NOT NULL,
+  `quarter_to_date` varchar(64) NOT NULL,
+  `today_range` varchar(64) NOT NULL,
+  `year_to_date` varchar(64) NOT NULL,
+  `week_range_52` varchar(64) NOT NULL,
+  `volume_traded` varchar(64) NOT NULL,
+  `week_volume_range_52` varchar(128) NOT NULL,
+  `quarterly_earning_graph` varchar(4096) NOT NULL,
+  `annually_earning_graph` varchar(4096) NOT NULL,
+  PRIMARY KEY (`stock_code`,`cache_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stock_detail`
+--
+
+INSERT INTO `stock_detail` (`stock_code`, `cache_date`, `symbol`, `financial_year_end`, `last_traded_price`, `close_price`, `change`, `change_perc`, `shares_outstanding`, `market_value_of_shares_outstanding`, `bid`, `week_to_date`, `ask`, `month_to_date`, `open_previous_day_close`, `quarter_to_date`, `today_range`, `year_to_date`, `week_range_52`, `volume_traded`, `week_volume_range_52`, `quarterly_earning_graph`, `annually_earning_graph`) VALUES
+('1', '2014-02-25', 'BNSJ', '31-Oct', '$23.55', '$23.55', '$0.05', '0.21 %', '2,927,232,000.00', '$68,936,313,600.00', '$23.50', '71.90%', '$23.55', '-2.28%', '$23.50', '-2.28%', '$23.50 to $23.55', '-9.63%', '$17.05 to $27.89', '204,279.00 units', '0 units to 4,439,405 units', '', ''),
+('94', '2014-02-25', 'GHL', '31-Dec', '$270.00', '$270.00', '$0.00', '0.00 %', '231,899,986.00', '$62,612,996,220.00', '$185.00', '166.01%', '$300.00', '166.01%', '$270.00', '166.01%', '$0.00 to $0.00', '166.01%', '$270.00 to $277.00', '0.00 units', '0 units to 752 units', '<chart caption=''Quarterly Earnings'' xAxisName=''Year'' yAxisName=''Earnings'' numberPrefix=''$'' showBorder=''1'' borderColor=''134b7c'' borderAlpha=''400'' borderThickness=''3'' canvasBgColor=''f3f4f8'' canvasBgAngle=''-90'' baseFont=''Verdana'' baseFontSize=''10'' baseFontColor=''710046'' bgColor=''f3f4f8'' bgAlpha=''-90'' showValues=''0''><categories><category label=''2000'' /><category label=''2001'' /><category label=''2003'' /><category label=''2004'' /><category label=''2005'' /><category label=''2007'' /><category label=''2008'' /><category label=''2010'' /><category label=''2011'' /><category label=''2012'' /><category label=''2013'' /></categories><dataset seriesName=''Quarter 1''><set value=''25906000'' /><set value=''44866000'' /><set value=''90445000'' /><set value=''532777000'' /><set value=''142184000'' /><set value=''-205150000'' /><set value=''50619000'' /><set value=''150310000'' /><set value=''89254000'' /><set value=''96975000'' /><set value=''10879000'' /></dataset><dataset seriesName=''Quarter 2''><set value=''29648000'' /><set value=''28158000'' /><set value=''19383000'' /><set value=''81065000'' /><set value=''9493000'' /><set value=''37633000'' /><set value=''485996000'' /><set value=''66912000'' /><set value=''13197000'' /><set value=''99147000'' /><set value=''36423000'' /></dataset><dataset seriesName=''Quarter 3''><set value=''33859000'' /><set value=''49393000'' /><set value=''733901000'' /><set value=''-14469000'' /><set value=''100206000'' /><set value=''99380000'' /><set value=''26807000'' /><set value=''-6409000'' /><set value=''141149000'' /><set value=''106179000'' /><set value=''14206000'' /></dataset><dataset seriesName=''Quarter 4''><set value=''62392000'' /><set value=''4110000'' /><set value=''211900000'' /><set value=''170603000'' /><set value=''120341000'' /><set value=''198732000'' /><set value=''-359102000'' /><set value=''194692000'' /><set value=''17503000'' /><set value=''50231000'' /><set value=''0'' /></dataset></chart>', '<chart caption=''Annual Earnings''  xAxisName=''Year'' yAxisName=''Earnings'' numberPrefix=''$'' showBorder=''1'' borderColor=''134b7c'' borderAlpha=''100'' borderThickness=''3'' canvasBgColor=''f3f4f8'' canvasBgAngle=''-90'' baseFont=''Verdana'' baseFontSize=''10'' baseFontColor=''710046'' bgColor=''f3f4f8'' bgAlpha=''-90'' showValues=''0''><set label=''2000'' value=''151805000'' isSliced=''1'' color=''ff3300''/><set label=''2001'' value=''126527000'' isSliced=''1'' color=''ff3300''/><set label=''2003'' value=''1055629000'' isSliced=''1'' color=''ff3300''/><set label=''2004'' value=''583220000'' isSliced=''1'' color=''ff3300''/><set label=''2005'' value=''372224000'' isSliced=''1'' color=''ff3300''/><set label=''2007'' value=''130595000'' isSliced=''1'' color=''ff3300''/><set label=''2008'' value=''204320000'' isSliced=''1'' color=''ff3300''/><set label=''2010'' value=''405505000'' isSliced=''1'' color=''ff3300''/><set label=''2011'' value=''261103000'' isSliced=''1'' color=''ff3300''/><set label=''2012'' value=''352532000'' isSliced=''1'' color=''ff3300''/></chart>');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `symbol_lookup`
 --
 
@@ -863,6 +904,35 @@ CREATE TABLE IF NOT EXISTS `v_index_details` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `v_stock_detail`
+--
+CREATE TABLE IF NOT EXISTS `v_stock_detail` (
+`cache_date` date
+,`stock_code` varchar(32)
+,`symbol` varchar(32)
+,`institution` varchar(256)
+,`financial_year_end` varchar(64)
+,`last_traded_price` varchar(16)
+,`close_price` varchar(64)
+,`change` varchar(64)
+,`change_perc` varchar(64)
+,`shares_outstanding` varchar(64)
+,`market_value_of_shares_outstanding` varchar(64)
+,`bid` varchar(64)
+,`week_to_date` varchar(64)
+,`ask` varchar(64)
+,`month_to_date` varchar(64)
+,`open_previous_day_close` varchar(64)
+,`quarter_to_date` varchar(64)
+,`today_range` varchar(64)
+,`year_to_date` varchar(64)
+,`week_range_52` varchar(64)
+,`volume_traded` varchar(64)
+,`week_volume_range_52` varchar(128)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `v_daily_composition`
 --
 DROP TABLE IF EXISTS `v_daily_composition`;
@@ -913,6 +983,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `v_index_details`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_index_details` AS select `daily_market_report`.`report_date` AS `report_date`,`daily_market_report`.`index_name` AS `index_name`,`daily_market_report`.`value_date` AS `value_date`,`daily_market_report`.`value` AS `value`,`daily_market_report`.`change` AS `change`,`daily_market_report`.`change_perc` AS `change_perc`,`daily_market_report`.`change_dir` AS `change_dir`,cast(`daily_market_report`.`vol` as decimal(12,0)) AS `vol`,`daily_market_report`.`market_capitalization` AS `market_capitalization`,`daily_market_report`.`change_1969` AS `change_1969`,`daily_market_report`.`wtd` AS `wtd`,`daily_market_report`.`mtd` AS `mtd`,`daily_market_report`.`qtd` AS `qtd`,`daily_market_report`.`ytd` AS `ytd`,`daily_market_report`.`wtd_direction` AS `wtd_direction`,`daily_market_report`.`mtd_direction` AS `mtd_direction`,`daily_market_report`.`qtd_direction` AS `qtd_direction`,`daily_market_report`.`ytd_direction` AS `ytd_direction`,`daily_market_report`.`change_perc_dir` AS `change_perc_dir` from `daily_market_report`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_stock_detail`
+--
+DROP TABLE IF EXISTS `v_stock_detail`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_stock_detail` AS select `sd`.`cache_date` AS `cache_date`,`sd`.`stock_code` AS `stock_code`,`sd`.`symbol` AS `symbol`,`sl`.`institution` AS `institution`,`sd`.`financial_year_end` AS `financial_year_end`,`sd`.`last_traded_price` AS `last_traded_price`,`sd`.`close_price` AS `close_price`,`sd`.`change` AS `change`,`sd`.`change_perc` AS `change_perc`,`sd`.`shares_outstanding` AS `shares_outstanding`,`sd`.`market_value_of_shares_outstanding` AS `market_value_of_shares_outstanding`,`sd`.`bid` AS `bid`,`sd`.`week_to_date` AS `week_to_date`,`sd`.`ask` AS `ask`,`sd`.`month_to_date` AS `month_to_date`,`sd`.`open_previous_day_close` AS `open_previous_day_close`,`sd`.`quarter_to_date` AS `quarter_to_date`,`sd`.`today_range` AS `today_range`,`sd`.`year_to_date` AS `year_to_date`,`sd`.`week_range_52` AS `week_range_52`,`sd`.`volume_traded` AS `volume_traded`,`sd`.`week_volume_range_52` AS `week_volume_range_52` from (`stock_detail` `sd` left join `symbol_lookup` `sl` on((`sd`.`symbol` = `sl`.`symbol`)));
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
