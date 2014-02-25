@@ -19,4 +19,9 @@ class SymbolLookup extends BaseController {
         $this->toJson($data);
     }
 
+    public function symbolData() {
+        $id = $this->input->get('symbol_code');
+        $this->toJson(array());
+    }
+
 }
