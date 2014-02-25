@@ -19,6 +19,7 @@ class BaseController extends CI_Controller {
         $this->load->library('DailyCompanyNews');
         $this->load->library('DailyQuote');
         $this->load->library('Symbol');
+        $this->load->library('SymbolDetail');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
@@ -28,6 +29,7 @@ class BaseController extends CI_Controller {
         $this->load->model('DailyCompanyNewsModel');
         $this->load->model('DailyQuoteModel');
         $this->load->model('SymbolLookupModel');
+        $this->load->model('SymbolDetailModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }
@@ -52,20 +54,20 @@ class BaseController extends CI_Controller {
     }
 
     public function getMarketDate() {
-         $date = $this->input->get('date');
-         if(!$date){
-             return $this->getDate('c');
-         }
-         
-         return $date;
+        $date = $this->input->get('date');
+        if (!$date) {
+            return $this->getDate('c');
+        }
+
+        return $date;
     }
-    
-     public function getRunDate() {
-         $date = $this->input->get('date');
-         if(!$date){
-             return $this->getDate('c');
-         }
-         return $date;
+
+    public function getRunDate() {
+        $date = $this->input->get('date');
+        if (!$date) {
+            return $this->getDate('c');
+        }
+        return $date;
     }
 
     function getDate($format) {

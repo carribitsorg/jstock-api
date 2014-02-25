@@ -11,7 +11,7 @@ class Symbol extends DataSource {
      */
     protected $model = null;
 
-    function __construct($date, $index, $indexName) {
+    function __construct($date) {
         $this->url = JSE_URL . "/controller.php?action=symbol_lookup";
     }
 

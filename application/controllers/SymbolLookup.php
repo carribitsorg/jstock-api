@@ -20,8 +20,11 @@ class SymbolLookup extends BaseController {
     }
 
     public function symbolData() {
-        $id = $this->input->get('symbol_code');
-        $this->toJson(array());
+        $stockCode = $this->input->get('symbol_code');
+        $dateIso = $this->getMarketDate();
+
+        $symbolDetail = new SymbolDetail($stockCode, $dateIso);
+        $symbolDetail->fetch();
     }
 
 }
