@@ -2,10 +2,10 @@
 
 class SymbolDetailModel extends CI_Model {
 
-    function isDBCached($date, $indexName) {
-        $this->db->select('report_date');
-        $this->db->from('daily_market_history');
-        $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
+    function isDBCached($date, $stockCode) {
+        $this->db->select('cache_date');
+        $this->db->from('stock_detail');
+        $this->db->where(array('cache_date' => $date, 'stock_code' => $stockCode));
         $this->db->limit(1);
 
         $query = $this->db->get();
@@ -17,23 +17,35 @@ class SymbolDetailModel extends CI_Model {
     }
 
     function save($data) {
-        foreach ($data as $row) {
-            $this->db->insert('daily_market_history', $row);
-        }
+        $this->db->insert('stock_detail ', $data);
     }
 
-    function getMarketIndexDetails($date, $indexName) {
+    function getStockDetails($date, $stockCode) {
         $this->db->select('*');
-        $this->db->from('v_daily_market_history');
-        $this->db->where(array('report_date' => $date, 'index_name' => $indexName));
-        //$this->db->limit(1);
+        $this->db->from('stock_detail');
+        $this->db->where(array('cache_date' => $date, 'stock_code' => $stockCode));
+        $this->db->limit(1);
 
         $result = $this->db->get()->result_array();
 
         if (is_array($result) && count($result) > 0) {
-            return $result;
+            return $result[0];
         }
         return array();
+    }
+    
+    function getAnnualStockGraph($date, $stockCode) {
+        $this->db->select('annually_earning_graph');
+        $this->db->from('stock_detail');
+        $this->db->where(array('cache_date' => $date, 'stock_code' => $stockCode));
+        $this->db->limit(1);
+
+        $result = $this->db->get()->result_array();
+
+        if (is_array($result) && count($result) > 0) {
+            return $result[0]['annually_earning_graph'];
+        }
+        return null;
     }
 
 }

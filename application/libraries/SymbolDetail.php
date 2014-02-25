@@ -31,25 +31,26 @@ class SymbolDetail extends DataSource {
 
     public function init() {
         $content = file_get_contents($this->url);
-        $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
 
         $dom = new domDocument;
 
         @$dom->loadHTML($content);
         $dom->preserveWhiteSpace = false;
 
-        $this->stockDetail1($dom);
-        $this->stockDetail2($dom);
+        $this->data['cache_date'] = $this->date;
+        $this->data['stock_code'] = $this->stockCode;
+
+        $this->stockDetailSummary($dom);
+        $this->stockDetail($dom);
+        $this->getGraphs();
     }
 
-    public function stockDetail1($dom) {
+    public function stockDetailSummary($dom) {
         $rowIndex = 0;
         $tables = $dom->getElementsByTagName('table');
 
         $table = $tables->item(4);
         $rows = $table->getElementsByTagName('tr');
-
-        $data['cache'] = $this->date;
 
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td');
@@ -73,7 +74,7 @@ class SymbolDetail extends DataSource {
         }
     }
 
-    public function stockDetail2($dom) {
+    public function stockDetail($dom) {
         $rowIndex = 0;
         $tables = $dom->getElementsByTagName('table');
 
@@ -114,6 +115,27 @@ class SymbolDetail extends DataSource {
         }
     }
 
+    function getGraphs() {
+        $this->data['quarterly_earning_graph'] = '';
+        $this->data['annually_earning_graph'] = '';
+
+        $quarterlyURL = JSE_URL . "/chart-xml/xml/xml_quarterly_earnings_chart-$this->stockCode.xml";
+        $annuallyURL = JSE_URL . "/chart-xml/xml/xml_annual_earnings_chart-$this->stockCode.xml";
+
+        $annuallyContent = file_get_contents($annuallyURL);
+        $quarterlyContent = file_get_contents($quarterlyURL);
+
+        if (strpos($quarterlyContent, '<chart') !== false) {
+            $this->data['quarterly_earning_graph'] = $quarterlyContent;
+        }
+
+        if (strpos($annuallyContent, '<chart') !== false) {
+            $this->data['annually_earning_graph'] = $annuallyContent;
+        }
+
+        var_dump($this->data);
+    }
+
     function getData($data, $key) {
         // Remove none ASCII
         $data = iconv('UTF-8', 'ASCII//IGNORE', $data);
@@ -133,14 +155,13 @@ class SymbolDetail extends DataSource {
     }
 
     protected function save() {
-        var_dump($this->data);
-        //$this->model->save($this->data);
+        $this->model->save($this->data);
     }
 
     public function fetch($result = true) {
-        $this->model = new MarketIndexPerformanceModel();
+        $this->model = new SymbolDetailModel();
 
-        if (!$this->model->isDBCached($this->date, $this->indexName)) {
+        if (!$this->model->isDBCached($this->date, $this->stockCode)) {
             $this->init();
             $this->load();
             $this->save();

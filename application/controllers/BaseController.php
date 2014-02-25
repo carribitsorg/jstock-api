@@ -1,7 +1,10 @@
 <?php
 
 //require_once('application/simple_html_dom.php'); 
+//require_once('application/third_party/pchart/PChartLoader.php');
+
 require_once('application/third_party/pchart/StockGraph.php');
+require_once('application/third_party/pchart/SymbolGraph.php');
 require_once('application/third_party/simple/autoloader.php');
 
 class BaseController extends CI_Controller {
