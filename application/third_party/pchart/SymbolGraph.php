@@ -10,8 +10,9 @@ class SymbolGraph {
     private $data = '';
     private $graphPhoto = null;
 
-    public function __construct($data) {
+    public function __construct($data, $settings) {
         $this->data = $data;
+        $this->settings = $settings;
         $this->graphPhoto = $this->render();
     }
 
@@ -28,7 +29,7 @@ class SymbolGraph {
 
         $MyData->setAxisDisplay(0, AXIS_FORMAT_CUSTOM, "YAxisFormatSymbol");
         $MyData->setAxisColor(0, array("R" => 96, "G" => 96, "B" => 96));
-        
+
 
 
         /* Create the pChart object */
@@ -46,7 +47,8 @@ class SymbolGraph {
         $myPicture->setGraphArea(45, 5, 310, 160);
 
         /* Draw the scale */
-        $scaleSettings = array("Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "CycleBackground" => TRUE);
+        $scaleSettings = array("Mode" => SCALE_MODE_MANUAL, "ManualScale" => array(0 => array("Min" => 0, "Max" => $this->settings['max'])),
+            "Factors" => array($this->settings['factor']), "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "CycleBackground" => TRUE);
         $myPicture->drawScale($scaleSettings);
 
         $myPicture->Antialias = TRUE;
@@ -69,8 +71,7 @@ class SymbolGraph {
 }
 
 function YAxisFormatSymbol($value) {
-    global $yScaleSymbolCount;
-    return '$' . number_format(($yScaleSymbolCount++ * 220)) . 'M';
+    return '$' . number_format($value) . 'M';
 }
 
 ?>

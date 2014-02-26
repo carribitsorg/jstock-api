@@ -47,13 +47,43 @@ class SymbolLookup extends BaseController {
 
         foreach ($chart->set as $set) {
             $graphData['label'][] = $set['label'];
-            $graphData['value'][] = intval($set['value']);
+            $graphData['value'][] = bcdiv($set['value'], 1000000, 0);
         }
-         $graph = new SymbolGraph($graphData);
-          $this->clearBuffer();
-          $graph->output(); 
+        $settings = $this->getGraphSettings($graphData['value']);
+        $graph = new SymbolGraph($graphData, $settings);
+
+        $this->clearBuffer();
+        $graph->output();
 
         var_dump($graphData);
+    }
+
+    function getGraphSettings($values) {
+        $maxValue = max($values);
+        $value = 0;
+
+        if ($maxValue >= 100 && $maxValue <= 250) {
+            $value = ceil($maxValue / 10) * 10;
+        } else if ($maxValue >= 250 && $maxValue <= 500) {
+            $value = ceil($maxValue / 100) * 100;
+        } else if ($maxValue >= 500 && $maxValue <= 1000) {
+            $value = ceil($maxValue / 100) * 100;
+        } else if ($maxValue >= 1000 && $maxValue <= 10000) {
+            $value = ceil($maxValue / 1000) * 1000;
+        } else if ($maxValue >= 10000) {
+            $value = ceil($maxValue / 1000) * 1000;
+        }
+
+        $factor = $value / 5;
+
+        var_dump($value);
+
+        $settings = array(
+            'max' => $maxValue,
+            'factor' => $factor
+        );
+
+        return $settings;
     }
 
 }
