@@ -40,7 +40,7 @@ class SymbolGraph {
         $serieSettings = array("R" => 109, "G" => 152, "B" => 171);
         $MyData->setPalette("Stocks", $serieSettings);
 
-        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 6, "R" => 110, "G" => 110, "B" => 110));
+        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/calibri.ttf", "FontSize" => 6, "R" => 110, "G" => 110, "B" => 110));
 
         /* Define the chart area */
         $myPicture->setGraphArea(45, 5, 310, 160);
