@@ -12,6 +12,11 @@ class Trigger extends BaseController {
     public function index() {
         
     }
+    
+    public function liveStock() {
+        $market = new LiveStockUpdate();
+        $market->fetch();
+    }
 
     public function market() {
         $dateISO = $this->getRunDate();

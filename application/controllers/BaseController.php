@@ -24,6 +24,7 @@ class BaseController extends CI_Controller {
         $this->load->library('Symbol');
         $this->load->library('SymbolDetail');
         $this->load->library('Market');
+        $this->load->library('LiveStockUpdate');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
@@ -35,6 +36,7 @@ class BaseController extends CI_Controller {
         $this->load->model('SymbolLookupModel');
         $this->load->model('SymbolDetailModel');
         $this->load->model('MarketModel');
+        $this->load->model('LiveStockModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }

@@ -14,8 +14,6 @@ class Market extends DataSource {
 
     protected $url = '';
     protected $data = array();
-    protected $refreshTime = '0.527779519092292';
-
     /**
      *
      * @var MarketModel 
