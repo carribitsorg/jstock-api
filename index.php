@@ -29,6 +29,7 @@ define('ENVIRONMENT', 'development');
  */
 
 define('JSE_URL', 'http://www.jamstockex.com');
+define('JSTOCK_URL', 'http://jstock.com/jstock');
 
 if (defined('ENVIRONMENT')) {
     switch (ENVIRONMENT) {

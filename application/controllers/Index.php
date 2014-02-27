@@ -1,6 +1,6 @@
 <?php
 
-class Index extends CI_Controller {
+class Index extends BaseController {
 
     function __construct() {
         parent::__construct();
@@ -9,5 +9,4 @@ class Index extends CI_Controller {
     public function index() {
         
     }
-
 }

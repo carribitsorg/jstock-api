@@ -52,6 +52,7 @@ class MarketIndexComposition extends DataSource {
             if ($rowIndex !== 0) {
                 $cols = $row->getElementsByTagName('td');
                 $url = $cols->item(0)->getElementsByTagName('a')->item(0)->getAttribute('href');
+                $stockCode = $this->getStockCode($url);
                 $data = array(
                     'report_date' => $this->date,
                     'index_name' => $this->indexName,
@@ -61,6 +62,7 @@ class MarketIndexComposition extends DataSource {
                     'change' => $this->toDecimal($cols->item(2)->nodeValue),
                     'change_perc' => $this->toDecimal($cols->item(3)->nodeValue),
                     'volume_traded' => $this->toDecimal($cols->item(4)->nodeValue),
+                    'stock_code' => $stockCode
                 );
                 $this->data[] = $data;
             }

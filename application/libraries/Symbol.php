@@ -54,11 +54,7 @@ class Symbol extends DataSource {
         }
     }
 
-    private function getStockCode($url) {
-        $url_parts = parse_url($url);
-        parse_str($url_parts['query'], $path_parts);
-        return $path_parts['StockCode'];
-    }
+    
 
     public function load() {
         

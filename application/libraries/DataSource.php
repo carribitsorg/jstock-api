@@ -21,9 +21,15 @@ class DataSource {
     public function getDate($dateString, $newFormat) {
         //$myDateTime = DateTime::createFromFormat($originalFomat, $dateString);
         //$newDateString = $myDateTime->format($newFormat);
-        
+
         $newDate = date($newFormat, strtotime($dateString));
         return $newDate;
+    }
+
+    protected function getStockCode($url) {
+        $url_parts = parse_url($url);
+        parse_str($url_parts['query'], $path_parts);
+        return $path_parts['StockCode'];
     }
 
 }

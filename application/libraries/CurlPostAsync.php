@@ -1,7 +1,8 @@
 <?php
 
 class CurlPostAsync {
-    function exec($url, $params) {
+
+    public static function exec($url, $params = array()) {
         foreach ($params as $key => &$val) {
             if (is_array($val))
                 $val = implode(',', $val);
@@ -23,7 +24,9 @@ class CurlPostAsync {
 
         fwrite($fp, $out);
         fclose($fp);
+        return true;
     }
+
 }
 
 ?>
