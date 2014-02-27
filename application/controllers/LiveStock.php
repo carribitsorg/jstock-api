@@ -10,6 +10,9 @@ class LiveStock extends BaseController {
     }
 
     public function index() {
-        var_dump('fghgh');
+        $model = new LiveStockModel();
+        $data = $model->getLiveStock();
+        $this->rawJson($data);
     }
+
 }

@@ -59,6 +59,16 @@ class BaseController extends CI_Controller {
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($data));
     }
+    
+    public function rawJson($data) {
+        $this->clearBuffer();
+        $this->output->set_header("Access-Control-Allow-Methods:  GET, POST, OPTIONS");
+        $this->output->set_header("Access-Control-Allow-Origin: *");
+        $this->output->set_header("Access-Control-Expose-Headers: Access-Control-Allow-Origin");
+        $this->output->set_header("Access-Control-Allow-Credentials: true");
+        $this->output->set_content_type('application/json');
+        $this->output->set_output($data);
+    }
 
     public function getMarketDate() {
         $model = new MarketModel();

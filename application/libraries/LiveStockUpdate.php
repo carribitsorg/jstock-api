@@ -25,7 +25,7 @@ class LiveStockUpdate extends DataSource {
     function __construct($date) {
         $this->date = $date;
         $this->url = JSE_URL . "/ticker-xml/test.xml?ini=$this->refreshTime";
-        $this->url = "http://jstock.com/jstock/live.xml";
+        //$this->url = "http://jstock.com/jstock/live.xml";
     }
 
     public function init() {
@@ -42,29 +42,30 @@ class LiveStockUpdate extends DataSource {
         $count = 0;
         $items = $dom->getElementsByTagName("item");
         foreach ($items as $item) {
+            $url = $item->getAttribute('link');
             $text = $item->textContent;
             if (strpos(trim($text), 'MARKET SUMMARY FOR') !== false) {
-                $this->data[0][] = trim($text);
+                $this->data[0]['lines'][] = trim($text);
                 $count++;
                 continue;
             }
-
 
             if (trim($text) == '|') {
                 $count++;
             } else {
                 $image = $this->getImage($text);
+                $link = $this->getLink($text, $url);
                 if ($image !== false) {
-                    $this->data[$count][] = $image;
+                    $this->data[$count]['lines'][] = $image;
                 } else {
-                    $this->data[$count][] = trim($text);
+                    $this->data[$count]['lines'][] = trim($text);
+                }
+
+                if ($link !== false) {
+                    $this->data[$count]['link'] = $link;
                 }
             }
-            // var_dump($text);
         }
-
-        var_dump($this->data);
-        exit;
     }
 
     private function getImage($url) {
@@ -79,12 +80,30 @@ class LiveStockUpdate extends DataSource {
         return false;
     }
 
-    private function getLink($text) {
-        if ($text) {
-            if (strpos($text, 'MAIN INDEX') !== false) {
-                return 'mov_none.png';
+    private function getLink($text, $link) {
+        if (strpos($text, 'MAIN INDEX') !== false) {
+            return '#link?MAIN_INDEX';
+        } else if (strpos($text, 'ALL JAMAICAN') !== false) {
+            return '#link?ALL_JAMAICAN';
+        } else if (strpos($text, 'JSE SELECT') !== false) {
+            return '#link?JSE_SELECT';
+        } else if (strpos($text, 'CROSS LISTED') !== false) {
+            return '#link?CROSS_LISTED';
+        } else {
+            $stockCode = $this->getLinkStockCode($link);
+
+            if ($stockCode !== false) {
+                return "#symboldetail?$stockCode";
             }
         }
+        return false;
+    }
+
+    private function getLinkStockCode($string) {
+        if (preg_match('/(?<=StockCode=)\S+/i', $string, $match)) {
+            return $match[0];
+        }
+        return false;
     }
 
     public function load() {
@@ -92,7 +111,7 @@ class LiveStockUpdate extends DataSource {
     }
 
     protected function save() {
-        $this->model->save($this->data);
+        $this->model->update($this->data);
     }
 
     public function fetch() {
