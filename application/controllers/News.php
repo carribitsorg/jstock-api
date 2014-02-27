@@ -18,7 +18,7 @@ class News extends BaseController {
 
         $news = array();
 
-        $dateISO = $this->getMarketDate();
+        $dateISO = $this->getCurrentDate();
 
         $model = new DailyCompanyNewsModel();
         $data = $model->getNews($dateISO);
@@ -38,8 +38,8 @@ class News extends BaseController {
 
         $model = new DailyCompanyNewsModel();
         $data = $model->getNewsItem($id);
-        
-        $data['full_date'] = 'Published ' .  date("l, F j, Y", strtotime($data['date_iso']));
+
+        $data['full_date'] = 'Published ' . date("l, F j, Y", strtotime($data['date_iso']));
 
         $this->toJson($data);
     }

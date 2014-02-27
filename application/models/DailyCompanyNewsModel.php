@@ -50,4 +50,9 @@ class DailyCompanyNewsModel extends CI_Model {
         return array();
     }
 
+    function purge($date) {
+        $this->db->where("news_date = ", "'$date'", false);
+        $this->db->delete('daily_news');
+    }
+
 }

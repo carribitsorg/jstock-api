@@ -75,13 +75,13 @@ class DailyCompanyNews extends DataSource {
     }
 
     public function fetch($result = true) {
-        $this->model = new DailyCompanyNewsModel();
 
-        if (!$this->model->isDBCached($this->date, $this->indexName)) {
-            $this->init();
-            $this->load();
-            $this->save();
-        }
+        $this->model = new DailyCompanyNewsModel();
+        $this->model->purge($this->date);
+
+        $this->init();
+        $this->load();
+        $this->save();
 
         return $this->data;
     }

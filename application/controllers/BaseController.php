@@ -23,6 +23,7 @@ class BaseController extends CI_Controller {
         $this->load->library('DailyQuote');
         $this->load->library('Symbol');
         $this->load->library('SymbolDetail');
+        $this->load->library('Market');
 
         $this->load->model('DailyMainSummaryModel');
         $this->load->model('MarketIndexChartModel');
@@ -33,6 +34,7 @@ class BaseController extends CI_Controller {
         $this->load->model('DailyQuoteModel');
         $this->load->model('SymbolLookupModel');
         $this->load->model('SymbolDetailModel');
+        $this->load->model('MarketModel');
 
         $this->config->set_item('csrf_protection', FALSE);
     }
@@ -57,11 +59,13 @@ class BaseController extends CI_Controller {
     }
 
     public function getMarketDate() {
-        $date = $this->input->get('date');
-        if (!$date) {
-            return $this->getDate('c');
-        }
+        $model = new MarketModel();
+        $date = $model->getLastDate();
 
+        if (!$date) {
+            $currentDate = $this->getDate('c');
+            $date = date('Y-m-d', (strtotime('-1 day', strtotime($currentDate))));
+        }
         return $date;
     }
 
@@ -71,6 +75,14 @@ class BaseController extends CI_Controller {
             return $this->getDate('c');
         }
         return $date;
+    }
+
+    public function getCurrentDate() {
+        return $this->getDate('c');
+    }
+
+    public function getCurrentTime() {
+        return date('Y-m-d H:i:s', time());
     }
 
     function getDate($format) {

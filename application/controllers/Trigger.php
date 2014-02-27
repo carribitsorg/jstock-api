@@ -13,8 +13,15 @@ class Trigger extends BaseController {
         
     }
 
-    public function dailySummary() {
+    public function market() {
         $dateISO = $this->getRunDate();
+
+        $market = new Market($dateISO);
+        $market->fetch();
+    }
+
+    public function dailySummary() {
+        $dateISO = $this->getMarketDate();
         $date = date("m/d/Y", strtotime($dateISO));
 
         $summary = new DailyMainMarketSummary($date);
@@ -26,13 +33,13 @@ class Trigger extends BaseController {
         $news = new DailyCompanyNews($dateISO);
         $news->fetch();
     }
-    
+
     public function dailyQuote() {
         $dateISO = $this->getRunDate();
         $news = new DailyQuote($dateISO);
         $news->fetch();
     }
-    
+
     public function refreshSymbol() {
         $news = new Symbol();
         $news->fetch();
@@ -57,7 +64,7 @@ class Trigger extends BaseController {
     }
 
     public function crossListedChart() {
-       $dateISO = $this->getRunDate();
+        $dateISO = $this->getRunDate();
         $summary = new MarketIndexChart($dateISO, 4, DataSource::CROSS_LISTED);
         $summary->fetch();
     }
