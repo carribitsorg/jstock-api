@@ -24,7 +24,6 @@ var http = WScript.CreateObject('Msxml2.XMLHTTP.6.0');
    //var url = WScript.Arguments.Item(0);
    var url = 'http://jstock.com/jstock/cronjob';
 
-
     // Make the request
 
     http.open("GET", url, false);

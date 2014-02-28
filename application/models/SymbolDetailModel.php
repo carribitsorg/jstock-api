@@ -29,11 +29,35 @@ class SymbolDetailModel extends CI_Model {
         $result = $this->db->get()->result_array();
 
         if (is_array($result) && count($result) > 0) {
+            $this->updateViewCount($stockCode);
             return $result[0];
         }
         return array();
     }
-    
+
+    function updateViewCount($stockCode) {
+        try {
+            $this->db->where('stock_code', $stockCode);
+            $this->db->set('view_count', '`view_count` + 1', FALSE);
+            $this->db->update('symbol_lookup');
+        } catch (Exception $e) {
+            
+        }
+    }
+
+    function getOutdatedSymbols($date) {
+        $this->db->select('*');
+        $this->db->from('v_outdated_stocks');
+        $this->db->where("cache_date != '$date' OR cache_date IS NULL");
+
+        $result = $this->db->get()->result_array();
+        if (is_array($result) && count($result) > 0) {
+           
+            return $result;
+        }
+        return array();
+    }
+
     function getAnnualStockGraph($date, $stockCode) {
         $this->db->select('annually_earning_graph');
         $this->db->from('stock_detail');

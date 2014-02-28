@@ -59,7 +59,7 @@ class BaseController extends CI_Controller {
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($data));
     }
-    
+
     public function rawJson($data) {
         $this->clearBuffer();
         $this->output->set_header("Access-Control-Allow-Methods:  GET, POST, OPTIONS");
