@@ -1,0 +1,1 @@
+schtasks /create /sc minute /mo 1 /tn "CronJob" /tr "%USERPROFILE%\Desktop\cronjob.cmd"

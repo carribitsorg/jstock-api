@@ -49,6 +49,12 @@ class LiveStockUpdate extends DataSource {
                 $count++;
                 continue;
             }
+            
+            if (strpos(trim($text), 'LIVE DATA FOR:') !== false) {
+                $this->data[0]['lines'][] = trim($text);
+                $count++;
+                continue;
+            }
 
             if (trim($text) == '|') {
                 $count++;
