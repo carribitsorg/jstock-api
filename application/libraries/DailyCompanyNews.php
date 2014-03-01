@@ -71,13 +71,15 @@ class DailyCompanyNews extends DataSource {
     }
 
     protected function save() {
+        if (!empty($this->data)) {
+            $this->model->purge($this->date);
+        }
         $this->model->save($this->data);
     }
 
     public function fetch($result = true) {
 
         $this->model = new DailyCompanyNewsModel();
-        $this->model->purge($this->date);
 
         $this->init();
         $this->load();
