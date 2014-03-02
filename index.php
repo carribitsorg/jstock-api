@@ -31,6 +31,7 @@ define('ENVIRONMENT', 'development');
 define('JSE_URL', 'http://www.jamstockex.com');
 define('JSTOCK_URL', 'http://jstock.com/jstock');
 define('DELAY_UPDATE_TIME', 600);
+define('CRON_STATUS', 0);
 
 if (defined('ENVIRONMENT')) {
     switch (ENVIRONMENT) {
