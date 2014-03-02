@@ -9,6 +9,7 @@ class SymbolGraph {
     private $yScaleCount = 0;
     private $data = '';
     private $graphPhoto = null;
+    private $scale = 2;
 
     public function __construct($data, $settings) {
         $this->data = $data;
@@ -22,7 +23,7 @@ class SymbolGraph {
         $points = $this->data;
         //var_dump($points);
         $MyData->addPoints($points['value'], "Stocks");
-        $MyData->setAxisName(0, "Earnings");
+        $MyData->setAxisName(0, " ");
         $MyData->addPoints($points['label'], "Labels");
         $MyData->setSerieDescription("Labels", "Months");
         $MyData->setAbscissa("Labels");
@@ -33,7 +34,7 @@ class SymbolGraph {
 
 
         /* Create the pChart object */
-        $myPicture = new pImage(310, 180, $MyData);
+        $myPicture = new pImage(310 * $this->scale, 180 * $this->scale, $MyData);
 
 
         /* Turn of Antialiasing */
@@ -41,18 +42,18 @@ class SymbolGraph {
         $serieSettings = array("R" => 109, "G" => 152, "B" => 171);
         $MyData->setPalette("Stocks", $serieSettings);
 
-        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/calibri.ttf", "FontSize" => 6, "R" => 110, "G" => 110, "B" => 110));
+        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 11, "R" => 110, "G" => 110, "B" => 110));
 
         /* Define the chart area */
-        $myPicture->setGraphArea(45, 5, 310, 160);
+        $myPicture->setGraphArea(45 * $this->scale, 5 * $this->scale, 310 * $this->scale, 160 * $this->scale);
 
         /* Draw the scale */
         $scaleSettings = array("Mode" => SCALE_MODE_MANUAL, "ManualScale" => array(0 => array("Min" => 0, "Max" => $this->settings['max'])),
-            "Factors" => array($this->settings['factor']), "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "CycleBackground" => TRUE);
+            "Factors" => array($this->settings['factor']), "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "CycleBackground" => TRUE,"LabelRotation"=>45);
         $myPicture->drawScale($scaleSettings);
 
         $myPicture->Antialias = TRUE;
-        $myPicture->drawText(150, 178, "Year");
+        //$myPicture->drawText(150, 178, "Year");
 
         /* Draw the area chart */
         $MyData->setSerieDrawable("Stocks", TRUE);

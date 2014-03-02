@@ -13,6 +13,7 @@ class StockGraph {
     private $yScaleCount = 0;
     private $data = '';
     private $graphPhoto = null;
+    private $scale = 1.0;
 
     public function __construct($data) {
         $this->data = $data;
@@ -30,7 +31,7 @@ class StockGraph {
         //var_dump($points);
         $MyData->addPoints($points['y_axis'], "Stocks");
         //$MyData->setSerieTicks("Probe 2",4); 
-        $MyData->setAxisName(0, "Volume");
+        $MyData->setAxisName(0, "Vol.");
         $MyData->addPoints($points['x_axis_value'], "Labels");
         $MyData->setSerieDescription("Labels", "Months");
         $MyData->setAbscissa("Labels");
@@ -41,8 +42,8 @@ class StockGraph {
 
 
         /* Create the pChart object */
-        $myPicture = new pImage(310, 180, $MyData);
-        
+        $myPicture = new pImage(310 * $this->scale, 180 * $this->scale, $MyData);
+
 
         /* Turn of Antialiasing */
         $myPicture->Antialias = FALSE;
@@ -52,7 +53,7 @@ class StockGraph {
         $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 6, "R" => 96, "G" => 96, "B" => 96));
 
         /* Define the chart area */
-        $myPicture->setGraphArea(38, 0, 310, 170);
+        $myPicture->setGraphArea(38 * $this->scale, 0, 310 * $this->scale, 170 * $this->scale);
 
         /* Draw the scale */
         $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
