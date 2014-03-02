@@ -37,10 +37,15 @@ class MainMarket extends BaseController {
         $dateISO = $this->getMarketDate();
         $indexName = (string) $this->input->get('index_name');
 
+        $settings = array(
+            'max' => 86400,
+            'factor' => 1200
+        );
+
         $model = new MarketIndexChartModel();
         $data = $model->getOneMonthGraph($dateISO, $indexName);
 
-        $graph = new StockGraph($data['one_month_graph']);
+        $graph = new StockGraph($data['one_month_graph'], $settings);
         $this->clearBuffer();
         $graph->output();
     }

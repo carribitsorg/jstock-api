@@ -15,8 +15,9 @@ class StockGraph {
     private $graphPhoto = null;
     private $scale = 1.0;
 
-    public function __construct($data) {
+    public function __construct($data, $settings) {
         $this->data = $data;
+        $this->settings = $settings;
         $this->graphPhoto = $this->render();
     }
 
@@ -56,7 +57,7 @@ class StockGraph {
         $myPicture->setGraphArea(38 * $this->scale, 0, 310 * $this->scale, 170 * $this->scale);
 
         /* Draw the scale */
-        $scaleSettings = array("XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
+        $scaleSettings = array("Factors" => array($this->settings['factor']),"XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
         $myPicture->drawScale($scaleSettings);
 
         $myPicture->Antialias = TRUE;
@@ -99,8 +100,9 @@ class StockGraph {
 }
 
 function YAxisFormat($value) {
-    global $yScaleCount;
-    return number_format(78000 + ($yScaleCount++ * 1200));
+    return  number_format($value);
+    //global $yScaleCount;
+    //return number_format(78000 + ($yScaleCount++ * 1200));
 }
 
 ?>
