@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
+$db['default']['hostname'] = 'www.rivalbits.com';
+$db['default']['username'] = 'rivalb5_root';
 $db['default']['password'] = '';
-$db['default']['database'] = 'jstock';
+$db['default']['database'] = 'rivalb5_jstock';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
