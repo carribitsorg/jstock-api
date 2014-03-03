@@ -98,7 +98,7 @@ class BaseController extends CI_Controller {
     }
 
     function getDate($format) {
-        $datetime = new DateTime($this->date);
+        $datetime = new DateTime();
         $date = $datetime->format($format);
         return substr($date, 0, 10);
     }

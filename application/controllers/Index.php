@@ -1,5 +1,5 @@
 <?php
-require_once('application/controllers/BaseController.php');
+require_once('application/controllers/baseController.php');
 class Index extends BaseController {
 
     function __construct() {

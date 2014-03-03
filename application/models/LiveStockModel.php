@@ -3,12 +3,14 @@
 class LiveStockModel extends CI_Model {
 
     function update($data) {
+      if(!empty($data)){
         $row = array(
             'stock_data' => json_encode($data),
             'last_updated' => date('Y-m-d H:i:s', time())
         );
 
         $this->db->update('live_stock', $row);
+        }
     }
 
     function getLiveStock() {
