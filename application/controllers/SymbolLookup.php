@@ -74,11 +74,11 @@ class SymbolLookup extends BaseController {
             $value = ceil($maxValue / 1000) * 1000;
         } else if ($maxValue >= 10000) {
             $value = ceil($maxValue / 1000) * 1000;
+        } else {
+            $value = ceil($maxValue);
         }
 
         $factor = $value / 5;
-
-        var_dump($value);
 
         $settings = array(
             'max' => $maxValue,

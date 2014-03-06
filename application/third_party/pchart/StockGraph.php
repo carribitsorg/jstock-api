@@ -7,6 +7,7 @@ include("class/pImage.class.php");
 
 global $yScaleCount;
 $yScaleCount = 0;
+global $settings;
 
 class StockGraph {
 
@@ -15,9 +16,9 @@ class StockGraph {
     private $graphPhoto = null;
     private $scale = 1.0;
 
-    public function __construct($data, $settings) {
+    public function __construct($data) {
         $this->data = $data;
-        $this->settings = $settings;
+        $this->settings = array();
         $this->graphPhoto = $this->render();
     }
 
@@ -26,10 +27,14 @@ class StockGraph {
         global $yScaleCount;
         $yScaleCount = 0;
 
+        global $settings;
+
         /* Create and populate the pData object */
         $MyData = new pData();
         $points = $this->getPairs($this->data);
-        //var_dump($points);
+        $this->settings = $this->getGraphSettings($points['y_axis']);
+        $settings = $this->settings;
+
         $MyData->addPoints($points['y_axis'], "Stocks");
         //$MyData->setSerieTicks("Probe 2",4); 
         $MyData->setAxisName(0, "Vol.");
@@ -52,12 +57,16 @@ class StockGraph {
         $MyData->setPalette("Stocks", $serieSettings);
 
         $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 6, "R" => 96, "G" => 96, "B" => 96));
-
+        $myPicture->customManipulate = true;
         /* Define the chart area */
         $myPicture->setGraphArea(38 * $this->scale, 0, 310 * $this->scale, 170 * $this->scale);
 
+        //var_dump($this->settings);exit;
         /* Draw the scale */
-        $scaleSettings = array("Factors" => array($this->settings['factor']),"XMargin" => 10, "YMargin" => 10, "Floating" => TRUE, "GridR" => 255, "GridG" => 255, "GridB" => 255, "DrawSubTicks" => TRUE, "CycleBackground" => TRUE);
+        $scaleSettings = array("Mode" => SCALE_MODE_MANUAL, "ManualScale" => array(0 => array("Min" => $this->settings['min'], "Max" => $this->settings['max'])),
+            "Factors" => array($this->settings['factor']),
+            "XMargin" => 10, "YMargin" => 10, "Floating" => TRUE,
+            "GridR" => 255, "GridG" => 255, "GridB" => 255, "CycleBackground" => TRUE);
         $myPicture->drawScale($scaleSettings);
 
         $myPicture->Antialias = TRUE;
@@ -70,7 +79,7 @@ class StockGraph {
         $MyData->setSerieDrawable("Stocks", TRUE);
         $myPicture->setShadow(TRUE, array("X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10));
         $myPicture->drawLineChart();
-        $myPicture->drawPlotChart(array("PlotBorder" => TRUE, "PlotSize" => 1, "BorderSize" => 1, "Surrounding" => -60, "BorderAlpha" => 80));
+        //$myPicture->drawPlotChart(array("PlotBorder" => TRUE, "PlotSize" => 1, "BorderSize" => 1, "Surrounding" => -60, "BorderAlpha" => 80));
 
         return $myPicture;
     }
@@ -94,15 +103,58 @@ class StockGraph {
                 $pairs['y_axis'][] = floatval(strtr($val[1], array(',' => '')));
             }
         }
+
         return $pairs;
+    }
+
+    function getGraphSettings($values) {
+        $maxValue = max($values);
+        $minValue = min($values);
+
+
+        $value2 = 0;
+        $value1 = 0;
+
+        if ($maxValue >= 100 && $maxValue < 1000) {
+            $value2 = (ceil($maxValue / 10) * 10) + 10;
+        } else if ($maxValue >= 1000 && $maxValue < 10000) {
+            $value2 = (ceil($maxValue / 100) * 100);
+        } else if ($maxValue >= 10000) {
+            $value2 = (ceil($maxValue / 1000) * 1000) + 1000;
+        } else {
+            $value2 = ceil($maxValue);
+        }
+
+
+        if ($minValue >= 100 && $minValue < 1000) {
+            $value1 = (floor($minValue / 10) * 10);
+        } else if ($minValue >= 1000 && $minValue < 10000) {
+            $value1 = (floor($minValue / 100) * 100);
+        } else if ($minValue >= 10000) {
+            $value1 = (floor($minValue / 1000) * 1000) - 1000;
+        } else {
+            $value1 = floor($minValue);
+        }
+
+        $value = $value2 - $value1;
+
+        $factor = $value / 5;
+
+        $settings = array(
+            'max' => $value2,
+            'min' => $value1,
+            'factor' => $factor
+        );
+        return $settings;
     }
 
 }
 
 function YAxisFormat($value) {
-    return  number_format($value);
-    //global $yScaleCount;
-    //return number_format(78000 + ($yScaleCount++ * 1200));
+    global $yScaleCount;
+    global $settings;
+    return number_format($settings['min'] + ($yScaleCount++ * $settings['factor']));
+    //return number_format($value);
 }
 
 ?>
