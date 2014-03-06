@@ -50,7 +50,6 @@ class StockGraph {
         /* Create the pChart object */
         $myPicture = new pImage(310 * $this->scale, 180 * $this->scale, $MyData);
 
-
         /* Turn of Antialiasing */
         $myPicture->Antialias = FALSE;
         $serieSettings = array("R" => 255, "G" => 69, "B" => 0);
@@ -81,6 +80,7 @@ class StockGraph {
         $myPicture->drawLineChart();
         //$myPicture->drawPlotChart(array("PlotBorder" => TRUE, "PlotSize" => 1, "BorderSize" => 1, "Surrounding" => -60, "BorderAlpha" => 80));
 
+        $myPicture->drawText(150, 20, $points['period']);
         return $myPicture;
     }
 
@@ -103,7 +103,9 @@ class StockGraph {
                 $pairs['y_axis'][] = floatval(strtr($val[1], array(',' => '')));
             }
         }
-
+        $begin = substr($pairs['x_axis'][0], 0, 6);
+        $end = substr(end($pairs['x_axis']), 0, 6);
+        $pairs['period'] = $begin . ' - ' . $end;
         return $pairs;
     }
 

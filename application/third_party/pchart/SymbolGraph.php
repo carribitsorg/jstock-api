@@ -65,7 +65,6 @@ class SymbolGraph {
     }
 
     public function output() {
-        /* Render the picture (choose the best way) */
         $this->graphPhoto->autoOutput("graphs/" . date('Y-m-d') . ".png");
     }
 
