@@ -2243,7 +2243,7 @@ class pDraw {
         $this->Shadow = $RestoreShadow;
     }
 
-    function drawScale($Format, $definate) {
+    function drawScale($Format) {
         $Pos = isset($Format["Pos"]) ? $Format["Pos"] : SCALE_POS_LEFTRIGHT;
         $Floating = isset($Format["Floating"]) ? $Format["Floating"] : FALSE;
         $Mode = isset($Format["Mode"]) ? $Format["Mode"] : SCALE_MODE_FLOATING;
@@ -2415,19 +2415,11 @@ class pDraw {
 
             $Scale = $this->computeScale($Data["Axis"][$AxisID]["Min"], $Data["Axis"][$AxisID]["Max"], $MaxDivs, $Factors, $AxisID);
 
-            if ($definate === true) {
-                $Data["Axis"][$AxisID]["Margin"] = $AxisParameter["Identity"] == AXIS_X ? $XMargin : $YMargin;
-                $Data["Axis"][$AxisID]["ScaleMin"] = $Format['ManualScale'][0]['Min'];
-                $Data["Axis"][$AxisID]["ScaleMax"] = $Format['ManualScale'][0]['Max'];
-                $Data["Axis"][$AxisID]["Rows"] = $Scale["Rows"];
-                $Data["Axis"][$AxisID]["RowHeight"] = $Scale["RowHeight"];
-            } else {
-                $Data["Axis"][$AxisID]["Margin"] = $AxisParameter["Identity"] == AXIS_X ? $XMargin : $YMargin;
-                $Data["Axis"][$AxisID]["ScaleMin"] = $Scale["XMin"];
-                $Data["Axis"][$AxisID]["ScaleMax"] = $Scale["XMax"];
-                $Data["Axis"][$AxisID]["Rows"] = $Scale["Rows"];
-                $Data["Axis"][$AxisID]["RowHeight"] = $Scale["RowHeight"];
-            }
+            $Data["Axis"][$AxisID]["Margin"] = $AxisParameter["Identity"] == AXIS_X ? $XMargin : $YMargin;
+            $Data["Axis"][$AxisID]["ScaleMin"] = $Scale["XMin"];
+            $Data["Axis"][$AxisID]["ScaleMax"] = $Scale["XMax"];
+            $Data["Axis"][$AxisID]["Rows"] = $Scale["Rows"];
+            $Data["Axis"][$AxisID]["RowHeight"] = $Scale["RowHeight"];
 
             if (isset($Scale["Format"])) {
                 $Data["Axis"][$AxisID]["Format"] = $Scale["Format"];
