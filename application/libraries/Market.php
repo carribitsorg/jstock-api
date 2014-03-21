@@ -40,11 +40,11 @@ class Market extends DataSource {
 
         $list = $nodes->item(0);
         $text = $list->nodeValue;
-        $text = trim(str_ireplace(array('as at ', 'th', 'rd', 'nd'), '', $text));
+        $text = trim(str_ireplace(array('as at ', 'th', 'rd', 'nd', 'st'), '', $text));
 
         /* $old_date_timestamp = strtotime($text);
           $new_date = date('Y-m-d H:i:s', $old_date_timestamp); */
-
+       
         $myDateTime = DateTime::createFromFormat('j F, Y', $text);
         $newDateString = $myDateTime->format('Y-m-d');
 
