@@ -23,7 +23,7 @@ class SymbolGraph {
         $points = $this->data;
         //var_dump($points);
         $MyData->addPoints($points['value'], "Stocks");
-        $MyData->setAxisName(0, " ");
+        $MyData->setAxisName(0, "Earnings");
         $MyData->addPoints($points['label'], "Labels");
         $MyData->setSerieDescription("Labels", "Months");
         $MyData->setAbscissa("Labels");
@@ -42,10 +42,10 @@ class SymbolGraph {
         $serieSettings = array("R" => 109, "G" => 152, "B" => 171);
         $MyData->setPalette("Stocks", $serieSettings);
 
-        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 11, "R" => 110, "G" => 110, "B" => 110));
+        $myPicture->setFontProperties(array("FontName" => "application/third_party/pchart/fonts/pf_arma_five.ttf", "FontSize" => 13, "R" => 110, "G" => 110, "B" => 110));
 
         /* Define the chart area */
-        $myPicture->setGraphArea(45 * $this->scale, 5 * $this->scale, 310 * $this->scale, 160 * $this->scale);
+        $myPicture->setGraphArea(52 * $this->scale, 5 * $this->scale, 310 * $this->scale, 160 * $this->scale);
 
         /* Draw the scale */
         $scaleSettings = array("Mode" => SCALE_MODE_MANUAL, "ManualScale" => array(0 => array("Min" => 0, "Max" => $this->settings['max'])),
@@ -65,13 +65,14 @@ class SymbolGraph {
     }
 
     public function output() {
+        /* Render the picture (choose the best way) */
         $this->graphPhoto->autoOutput("graphs/" . date('Y-m-d') . ".png");
     }
 
 }
 
 function YAxisFormatSymbol($value) {
-    return '$' . number_format($value) . 'M';
+    return '  $' . number_format($value) . 'M';
 }
 
 ?>

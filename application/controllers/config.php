@@ -12,7 +12,7 @@ class Config extends BaseController {
         $date = $this->getMarketDate();
         $data = array(
             'stock_date' => $date,
-            'stock_date_full' => date("l, M j, Y", strtotime($date))
+            'stock_date_full' => date("l, M j", strtotime($date))
         );
 
         $this->toJson($data);
